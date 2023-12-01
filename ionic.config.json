@@ -1,0 +1,7 @@
+{
+  "name": "Res-Q Food",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
