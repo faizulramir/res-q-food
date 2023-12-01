@@ -1,0 +1,39 @@
+<ion-content class="ion-padding" style="background-image: url('');">
+  <h1 style="font-size: 30px; margin-bottom:0;">Welcome</h1>
+  <p style="padding-top:0;">Start your helping journey</p>
+  <br>
+  <img src="../../assets/img/auth-bg.png" alt="">
+  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+    <ng-template>
+      <ion-content>
+        <ion-row style="margin-top: 7%;">
+          <ion-col class="ion-activatable" style="text-align: center; border-right: 1px solid black;">
+            <ion-ripple-effect></ion-ripple-effect>
+            <img src="../../assets/img/ngo.png" width="47%" alt="" (click)="goSignUp('ngo')">
+            <h4>NGO</h4>
+          </ion-col>
+          <ion-col class="ion-activatable" style="text-align: center;">
+            <ion-ripple-effect></ion-ripple-effect>
+            <img src="../../assets/img/user.png" width="50%" (click)="goSignUp('vol')">
+            <h4>Volunteer</h4>
+          </ion-col>
+        </ion-row>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+
+<ion-footer class="ion-no-border ion-padding">
+  <ion-toolbar>
+    <div class="row" style="text-align: center;">
+      <div class="col">
+        <ion-button size="large" class="btn-bottom" (click)="goSignIn()">Sign In</ion-button>
+      </div>
+    </div>
+    <div class="row" style="padding-top: 20px; text-align: center !important;">
+      <div class="col">
+        <ion-button color="light" size="large" id="open-modal" expand="block">Sign Up</ion-button>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,42 @@
+swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+swiper-slide img {
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  object-fit: cover;
+}
+
+ion-button {
+  position: relative;
+}
+
+.img-container {
+  position: relative;
+  height: 100%;
+  text-align: left;
+  color: black;
+}
+
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+.centered {
+  position: absolute;
+  width: 85%;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

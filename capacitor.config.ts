@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'res.q.food',
   appName: 'Res-Q Food',
   webDir: 'www',
   server: {
