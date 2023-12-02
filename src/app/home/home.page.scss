@@ -1,0 +1,19 @@
+.pacifico{
+  --ion-font-family:  'Pacifico'!important;
+  font-family:  'Pacifico' !important;
+}
+
+.top-card {
+    height: 30%;
+    width: 100%;
+    border-radius: 10px;
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,45,133,1) 100%);
+}
+    
+.xc {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
