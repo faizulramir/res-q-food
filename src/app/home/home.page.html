@@ -1,20 +1,31 @@
-<ion-header class="ion-no-border">
+<ion-header class="ion-no-border" *ngIf="userType === 1">
   <ion-toolbar>
     <ion-title class="pacifico">
       Res-Q Food
     </ion-title>
     <ion-buttons slot="end">
-      <ion-icon slot="icon-only" name="globe-outline"></ion-icon>
+      <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-header class="ion-no-border" *ngIf="userType === 0">
+  <ion-toolbar class="header-color">
+    <ion-title class="pacifico" style="color: white;">
+      Res-Q Food
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-icon slot="icon-only" color="light" name="notifications-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="userType === 1">
   <div class="top-card">
     <ion-row class="xc">
       <ion-col  style="text-align: center;">
         <h4 style="color: white;">Share Your Love with donation</h4>
-        <ion-button color="tertiary">Donate</ion-button>
+        <ion-button (click)="goDonate()" color="tertiary">Donate</ion-button>
       </ion-col>
       <ion-col>
         <img src="../../assets/img/auth-bg.png" alt="">
@@ -22,43 +33,44 @@
     </ion-row>
   </div>
 
-  <div style="padding-top: 20px; padding-bottom: 15px;">
+  <!-- <div style="padding-top: 20px; padding-bottom: 15px;">
     <h4>Donate</h4>
     <ion-row>
       <ion-col style="padding-left: 0;">
         <ion-card class="ion-activatable" style="width: 100%; text-align: center; margin-left: 0;">
           <ion-ripple-effect></ion-ripple-effect>
-          <img alt="Silhouette of mountains" width="40px" style="padding-top: 10px;" src="../../assets/img/burger.png" />
+          <img width="40px" style="padding-top: 10px;" src="../../assets/img/burger.png" />
           <p style="text-align: center; margin-top: 3px; margin-bottom: 4px;">Food</p>
         </ion-card>
       </ion-col>
       <ion-col>
         <ion-card class="ion-activatable" style="width: 100%; text-align: center; margin-left: 0;">
           <ion-ripple-effect></ion-ripple-effect>
-          <img alt="Silhouette of mountains" width="40px" style="padding-top: 10px;" src="../../assets/img/education.png" />
+          <img width="40px" style="padding-top: 10px;" src="../../assets/img/education.png" />
           <p style="text-align: center; margin-top: 3px; margin-bottom: 4px;">Education</p>
         </ion-card>
       </ion-col>
       <ion-col>
         <ion-card class="ion-activatable" style="width: 100%; text-align: center; margin-left: 0;">
           <ion-ripple-effect></ion-ripple-effect>
-          <img alt="Silhouette of mountains" width="40px" style="padding-top: 10px;" src="../../assets/img/water.png" />
+          <img width="40px" style="padding-top: 10px;" src="../../assets/img/water.png" />
           <p style="text-align: center; margin-top: 3px; margin-bottom: 4px;">Water</p>
         </ion-card>
       </ion-col>
       <ion-col>
         <ion-card class="ion-activatable" style="width: 100%; text-align: center; margin-left: 0;">
           <ion-ripple-effect></ion-ripple-effect>
-          <img alt="Silhouette of mountains" width="40px" style="padding-top: 10px;" src="../../assets/img/laundry.png" />
+          <img width="40px" style="padding-top: 10px;" src="../../assets/img/laundry.png" />
           <p style="text-align: center; margin-top: 3px; margin-bottom: 4px;">Clothes</p>
         </ion-card>
       </ion-col>
     </ion-row>
-  </div>
+  </div> -->
 
-  <h4 style="padding-bottom: 15px;">Latest Updates</h4>
-  <ion-card>
-    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+  <h4 style="padding-bottom: 15px; padding-top: 20px;">Latest Updates</h4>
+  <ion-card class="ion-activatable">
+    <ion-ripple-effect></ion-ripple-effect>
+    <img src="https://ionicframework.com/docs/img/demos/card-media.png" />
     <ion-card-header>
       <ion-card-title>Card Title</ion-card-title>
       <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
@@ -68,4 +80,60 @@
       Here's a small text description for the card content. Nothing more, nothing less.
     </ion-card-content>
   </ion-card>
+</ion-content>
+
+<ion-content *ngIf="userType === 0">
+  <div class="top-bg">
+    <div class="top-c ion-padding xc-2">
+      <form style="width: 100%;">
+        <h4 style="text-decoration: underline; color: white;">Request Status</h4>
+        <ion-row>
+          <ion-col>
+            <ion-card style="text-align: center; width: 100%; height: 80px; margin-left: 0;">
+              <h4 style="margin-bottom: 0;">2</h4>
+              <p style="margin-top: 0;">New</p>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card style="text-align: center; width: 100%; height: 80px; margin-left: 0;">
+              <h4 style="margin-bottom: 0;">0</h4>
+              <p style="margin-top: 0;">Pending</p>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card style="text-align: center; width: 100%; height: 80px; margin-left: 0;">
+              <h4 style="margin-bottom: 0;">13</h4>
+              <p style="margin-top: 0;">Completed</p>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </form>
+      
+    </div>
+  </div>
+ 
+  <hr>
+  <div class="bot-c ion-padding">
+    <h4>New Request</h4>
+    <ion-list>
+      <ion-item button>
+        <ion-thumbnail slot="start">
+          <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+        </ion-thumbnail>
+        <p><b>Paneer Masala, roti, chawai</b> <br> Food for 23 peoples <br> Cooking Time: 2:49 PM <br> Location: Adawad, India, 425320</p>
+      </ion-item>
+      <ion-item button>
+        <ion-thumbnail slot="start">
+          <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+        </ion-thumbnail>
+        <p><b>Paneer Masala, roti, chawai</b> <br> Food for 23 peoples <br> Cooking Time: 2:49 PM <br> Location: Adawad, India, 425320</p>
+      </ion-item>
+      <ion-item button>
+        <ion-thumbnail slot="start">
+          <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+        </ion-thumbnail>
+        <p><b>Paneer Masala, roti, chawai</b> <br> Food for 23 peoples <br> Cooking Time: 2:49 PM <br> Location: Adawad, India, 425320</p>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

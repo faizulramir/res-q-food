@@ -1,4 +1,38 @@
-<div id="container">
-  <strong>{{ name }}</strong>
-  <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-</div>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="pacifico">
+      {{
+        name === 'pending' ? 'Pending':
+        (name === 'completed' ? 'Completed' : (
+          name === 'history' ? 'History' : 'History'
+        ))
+      }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item button (click)="goDetail(name)">
+      <ion-thumbnail slot="start">
+        <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+      </ion-thumbnail>
+      <p><b>Paneer Masala, roti, chawai</b> <br> Food for 23 peoples <br> Cooking Time: 2:49 PM <br> Location: Adawad, India, 425320</p>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item button (click)="goDetail(name)">
+      <ion-thumbnail slot="start" >
+        <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+      </ion-thumbnail>
+      <p><b>Paneer Masala, roti, chawai</b> <br> Food for 23 peoples <br> Cooking Time: 2:49 PM <br> Location: Adawad, India, 425320</p>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item button (click)="goDetail(name)">
+      <ion-thumbnail slot="start">
+        <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+      </ion-thumbnail>
+      <p><b>Paneer Masala, roti, chawai</b> <br> Food for 23 peoples <br> Cooking Time: 2:49 PM <br> Location: Adawad, India, 425320</p>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

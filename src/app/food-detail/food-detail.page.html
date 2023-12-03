@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="goHistory()">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>Food Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item lines="none">
+    <h1>Paneer Masala, roti, chawai</h1>
+  </ion-item>
+  <ion-item lines="none" style="padding-top: 20px;">
+    <ion-avatar slot="start">
+      <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+    </ion-avatar>
+    <ion-label><b>User Testing</b></ion-label>
+  </ion-item>
+  <div class="ion-padding" style="padding-top: 20px;">
+    <h4>Cooking Time</h4>
+    <p>2:59 PM</p>
+    <br>
+    <h4>Quantity</h4>
+    <p>For 23 People</p>
+    <br>
+    <h4>Address</h4>
+    <p><a>Adawad, India, 425320</a></p>
+    <br>
+    <h4>Mobile Number</h4>
+    <p>0178016870</p>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border ion-padding" *ngIf="userType === 1">
+  <ion-toolbar style="text-align: center;">
+    <ion-button style="width: 100%;" size="large">Accept</ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -16,8 +16,20 @@ const routes: Routes = [
         loadChildren: () => import('../post/post.module').then(m => m.PostPageModule)
       },
       {
+        path: 'chat',
+        loadChildren: () => import('../chat/chat.module').then(m => m.ChatPageModule)
+      },
+      {
         path: 'history',
         loadChildren: () => import('../history/history.module').then(m => m.HistoryPageModule)
+      },
+      {
+        path: 'pending',
+        loadChildren: () => import('../pending/pending.module').then(m => m.PendingPageModule)
+      },
+      {
+        path: 'completed',
+        loadChildren: () => import('../completed/completed.module').then(m => m.CompletedPageModule)
       },
       {
         path: 'profile',

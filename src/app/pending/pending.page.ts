@@ -7,11 +7,11 @@ import { AlertController } from '@ionic/angular';
 import { ApiService } from '../services/api/api.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss']
+  selector: 'app-pending',
+  templateUrl: 'pending.page.html',
+  styleUrls: ['pending.page.scss']
 })
-export class HomePage {
+export class PendingPage {
 
   constructor(
     private modalCtrl: ModalController,
@@ -23,9 +23,8 @@ export class HomePage {
     private route: ActivatedRoute,
   ) {}
 
-  userType:any = 1
 
-  goDonate() {
-    this.router.navigate(['index/tabs/post'])
+  goDetail() {
+    this.router.navigate(['food-detail'])
   }
 }

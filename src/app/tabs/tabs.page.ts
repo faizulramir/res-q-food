@@ -9,4 +9,5 @@ export class TabsPage {
 
   constructor() {}
 
+  userType:any = 0
 }
