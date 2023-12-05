@@ -1,0 +1,45 @@
+.pacifico{
+  --ion-font-family:  'Pacifico'!important;
+  font-family:  'Pacifico' !important;
+}
+
+.online-ngo {
+  width: 100%;
+  height: auto;
+  background: rgb(128, 128, 128, 0.1);
+  border-radius: 10px;
+}
+
+.online-container {
+  position: relative;
+}
+
+.online-icon {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 28px;
+  left: 40px;
+  background: green;
+}
+
+.online-icon-2 {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  background: green;
+}
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  .card {
+    display: inline-block;
+  }
+}

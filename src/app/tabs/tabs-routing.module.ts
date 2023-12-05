@@ -16,8 +16,8 @@ const routes: Routes = [
         loadChildren: () => import('../post/post.module').then(m => m.PostPageModule)
       },
       {
-        path: 'chat',
-        loadChildren: () => import('../chat/chat.module').then(m => m.ChatPageModule)
+        path: 'room-talk',
+        loadChildren: () => import('../room-talk/room-talk.module').then(m => m.RoomTalkPageModule)
       },
       {
         path: 'history',

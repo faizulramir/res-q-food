@@ -17,6 +17,14 @@ const routes: Routes = [
   {
     path: 'food-detail',
     loadChildren: () => import('./food-detail/food-detail.module').then( m => m.FoodDetailPageModule)
+  },
+  {
+    path: 'room-talk',
+    loadChildren: () => import('./room-talk/room-talk.module').then( m => m.RoomTalkPageModule)
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
   }
 ];
 @NgModule({

@@ -1,0 +1,26 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon slot="icon-only" name="arrow-back-outline" slot="end" (click)="goBack()"></ion-icon>
+    </ion-buttons>
+    <ion-title class="pacifico">
+      Create Chat Room
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="fullheight xc">
+    <form style="width: 100%; margin: 20px;">
+      <div>
+        <h4 style="text-align: center; padding-bottom: 50px;">Create your room!</h4>
+        <p style="margin-bottom: 5px; text-align: center;">Name your room spaces</p>
+        <ion-item style="border-radius: 8px;">
+          <ion-input name="room" type="text" placeholder="What do want to talk about?"></ion-input>
+        </ion-item>
+        <br>
+        <ion-button size="large" style="width: 100%;">Start Now</ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>
