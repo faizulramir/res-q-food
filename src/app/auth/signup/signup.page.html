@@ -3,27 +3,27 @@
   <h1 style="text-align: center;" class="pad-bot">Create Account</h1>
   <div class="row pad-bot">
     <div class="col">
-      <ion-input aria-setsize="large" name="username" label="Username" label-placement="floating" fill="outline" placeholder="Username"></ion-input>
+      <ion-input aria-setsize="large" [(ngModel)]="register.username" name="username" label="Username" label-placement="floating" fill="outline" placeholder="Username"></ion-input>
     </div>
   </div>
   <div class="row pad-bot">
     <div class="col">
-      <ion-input aria-setsize="large" name="email" type="email" label="Email" label-placement="floating" fill="outline" placeholder="Email"></ion-input>
+      <ion-input aria-setsize="large" [(ngModel)]="register.email" name="email" type="email" label="Email" label-placement="floating" fill="outline" placeholder="Email"></ion-input>
     </div>
   </div>
   <div class="row pad-bot">
     <div class="col">
-      <ion-input aria-setsize="large" name="phone" type="tel" label="Phone Number" label-placement="floating" fill="outline" placeholder="Phone Number"></ion-input>
+      <ion-input aria-setsize="large" [(ngModel)]="register.phone" name="phone" type="tel" label="Phone Number" label-placement="floating" fill="outline" placeholder="Phone Number"></ion-input>
     </div>
   </div>
   <div class="row pad-bot-2">
     <div class="col">
-      <ion-input aria-setsize="large" name="password" label="Password" label-placement="floating" fill="outline" placeholder="Password"></ion-input>
+      <ion-input aria-setsize="large" [(ngModel)]="register.password" type="password" name="password" label="Password" label-placement="floating" fill="outline" placeholder="Password"></ion-input>
     </div>
   </div>
   <div class="row">
     <div class="col" style="text-align: center;">
-      <ion-button size="large" style="width: 100%;">Sign Up</ion-button>
+      <ion-button size="large" style="width: 100%;" (click)="doSignUp()">Sign Up</ion-button>
     </div>
   </div>
   <div class="row">

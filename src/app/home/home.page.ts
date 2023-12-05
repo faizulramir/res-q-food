@@ -23,7 +23,18 @@ export class HomePage {
     private route: ActivatedRoute,
   ) {}
 
-  userType:any = 1
+  userType:any
+  
+  async ionViewWillEnter() {
+    const token = await this.storage.get('token')
+    const userType = await this.storage.get('userType')
+
+    if (!token) {
+      this.router.navigate([''])
+    }
+    
+    this.userType = userType ? userType : 0;
+  }
 
   goDonate() {
     this.router.navigate(['index/tabs/post'])

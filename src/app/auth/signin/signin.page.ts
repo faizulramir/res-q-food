@@ -23,7 +23,21 @@ export class SigninPage {
     private route: ActivatedRoute,
   ) { }
 
+  login: any = {
+    username: '',
+    password: ''
+  }
 
+  loginData:any 
+
+  async ionViewWillEnter() {
+    const token = await this.storage.get('token')
+
+    if (token) {
+      this.router.navigate(['/index/tabs/home'])
+    }
+  }
+  
   goSignUp(type:any) {
     let navigationExtras: NavigationExtras = {
       state: { 
@@ -44,7 +58,38 @@ export class SigninPage {
     }
   }
 
-  doLogin() {
-    this.router.navigate(['index/tabs/home'])
+  async doLogin() {
+    if (this.login.username && this.login.password) {
+      this.loginData = await this.api.postLogin(this.login)
+      if (this.loginData) {
+        this.presentToast('Authenticating')
+        if (this.loginData.status == 'Error') {
+          this.presentToast(this.loginData.msg)
+        } else {
+          this.presentToast(this.loginData.msg)
+          this.storage.set('token', this.loginData.token)
+          this.storage.set('user', this.loginData.user)
+          this.storage.set('userType', this.loginData.user.type)
+
+          const pnToken = await this.storage.get('pnToken')
+          let postPNToken = await this.api.postPNToken(pnToken, this.loginData.user.id)
+          if (postPNToken) {
+            this.router.navigate(['index/tabs/home'])
+          }
+        }
+      }
+    } else {
+      this.presentToast('Please fill in required fields!')
+    }
+  }
+
+  async presentToast(msg:any) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 1500,
+      position: 'bottom',
+    });
+
+    await toast.present();
   }
 }

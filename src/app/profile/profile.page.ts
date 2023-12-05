@@ -22,8 +22,32 @@ export class ProfilePage {
     private route: ActivatedRoute,
   ) {}
 
-  doLogout() {
+  async doLogout() {
+    await this.storage.remove('token')
+    await this.storage.remove('user')
+    await this.storage.remove('userType')
     this.router.navigate(['auth'])
   }
 
+  async confirmLogout() {
+    const alert = await this.alertController.create({
+      header: 'Confirm Logout?',
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+          handler: () => {
+            console.log("Canceled");
+          },
+        },
+        {
+          text: "OK",
+          handler: () => {
+           this.doLogout();
+          },
+        },
+      ],
+    });
+    await alert.present();
+  } 
 }

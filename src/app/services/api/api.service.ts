@@ -8,14 +8,14 @@ import { CapacitorHttp } from '@capacitor/core';
 })
 
 export class ApiService {
-  baseUrl:string = "https://welcome-regularly-moose.ngrok-free.app/api";
+  baseUrl:string = "http://127.0.0.1:8000/api";
 
   constructor(
     private storage: StorageService,
   ) {}
 
   async postLogin(credentials:any) {
-    const data = { email: credentials.email, password: credentials.password };
+    const data = { username: credentials.username, password: credentials.password };
 
     const options = {
       url: this.baseUrl + "/login",
@@ -29,7 +29,7 @@ export class ApiService {
   }
 
   async postRegister(credentials:any) {
-    const data = { email: credentials.email, password: credentials.password, name: credentials.name };
+    const data = { email: credentials.email, password: credentials.password, username: credentials.username, phone: credentials.phone, userType: credentials.userType };
 
     const options = {
       url: this.baseUrl + "/register",

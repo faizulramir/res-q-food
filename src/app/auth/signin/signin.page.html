@@ -1,26 +1,29 @@
 <ion-content class="ion-padding">
   <img src="../../assets/img/signin.png" alt="">
   <h1 style="text-align: center;" class="pad-bot">Login To Account</h1>
-  <div class="row pad-bot">
-    <div class="col">
-      <ion-input aria-setsize="large" name="username" label="Username" label-placement="floating" fill="outline" placeholder="Username"></ion-input>
+
+  <form>
+    <div class="row pad-bot">
+      <div class="col">
+        <ion-input aria-setsize="large" [(ngModel)]="login.username" name="username" label="Username" label-placement="floating" fill="outline" placeholder="Username"></ion-input>
+      </div>
     </div>
-  </div>
-  <div class="row pad-bot-2">
-    <div class="col">
-      <ion-input aria-setsize="large" name="password" label="Password" label-placement="floating" fill="outline" placeholder="Password"></ion-input>
+    <div class="row pad-bot-2">
+      <div class="col">
+        <ion-input aria-setsize="large" [(ngModel)]="login.password" name="password" type="password" label="Password" label-placement="floating" fill="outline" placeholder="Password"></ion-input>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col" style="text-align: center;">
-      <ion-button size="large" style="width: 100%;" (click)="doLogin()">Login</ion-button>
+    <div class="row">
+      <div class="col" style="text-align: center;">
+        <ion-button size="large" style="width: 100%;" (click)="doLogin()">Login</ion-button>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col" style="text-align: center;">
-      <p>Don't have an account? <span style="color: blue; text-decoration: underline;" id="open-modal-2" expand="block">Sign Up Here</span></p>
+    <div class="row">
+      <div class="col" style="text-align: center;">
+        <p>Don't have an account? <span style="color: blue; text-decoration: underline;" id="open-modal-2" expand="block">Sign Up Here</span></p>
+      </div>
     </div>
-  </div>
+  </form>
 
   <ion-modal #modal trigger="open-modal-2" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]">
     <ng-template>
@@ -28,12 +31,12 @@
         <ion-row style="margin-top: 7%;">
           <ion-col class="ion-activatable" style="text-align: center; border-right: 1px solid black;">
             <ion-ripple-effect></ion-ripple-effect>
-            <img src="../../assets/img/ngo.png" width="47%" alt="" (click)="goSignUp('ngo')">
+            <img src="../../assets/img/ngo.png" width="47%" alt="" (click)="goSignUp('1')">
             <h4>NGO</h4>
           </ion-col>
           <ion-col class="ion-activatable" style="text-align: center;">
             <ion-ripple-effect></ion-ripple-effect>
-            <img src="../../assets/img/user.png" width="50%" (click)="goSignUp('vol')">
+            <img src="../../assets/img/user.png" width="50%" (click)="goSignUp('0')">
             <h4>Volunteer</h4>
           </ion-col>
         </ion-row>

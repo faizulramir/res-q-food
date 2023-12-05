@@ -1,4 +1,4 @@
-<ion-header class="ion-no-border" *ngIf="userType === 1">
+<ion-header class="ion-no-border" *ngIf="userType === 0">
   <ion-toolbar>
     <ion-title class="pacifico">
       Res-Q Food
@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-header class="ion-no-border" *ngIf="userType === 0">
+<ion-header class="ion-no-border" *ngIf="userType === 1">
   <ion-toolbar class="header-color">
     <ion-title class="pacifico" style="color: white;">
       Res-Q Food
@@ -20,7 +20,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" *ngIf="userType === 1">
+<ion-content class="ion-padding" *ngIf="userType === 0">
   <div class="top-card">
     <ion-row class="xc">
       <ion-col  style="text-align: center;">
@@ -82,7 +82,7 @@
   </ion-card>
 </ion-content>
 
-<ion-content *ngIf="userType === 0">
+<ion-content *ngIf="userType === 1">
   <div class="top-bg">
     <div class="top-c ion-padding xc-2">
       <form style="width: 100%;">
