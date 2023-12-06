@@ -5,6 +5,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ApiService } from '../services/api/api.service';
+import { NotificationModalComponent } from '../notification-modal/notification-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -38,5 +39,12 @@ export class HomePage {
 
   goDonate() {
     this.router.navigate(['index/tabs/post'])
+  }
+
+  async openNotification() {
+    const modal = await this.modalCtrl.create({
+      component: NotificationModalComponent,
+    });
+    modal.present();
   }
 }

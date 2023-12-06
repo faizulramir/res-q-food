@@ -5,6 +5,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api/api.service';
+import { ForgetComponent } from 'src/app/forget/forget.component';
 
 @Component({
   selector: 'app-signin',
@@ -91,5 +92,12 @@ export class SigninPage {
     });
 
     await toast.present();
+  }
+
+  async goForget() {
+    const modal = await this.modalCtrl.create({
+      component: ForgetComponent,
+    });
+    modal.present();
   }
 }

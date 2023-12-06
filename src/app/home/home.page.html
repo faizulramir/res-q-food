@@ -15,7 +15,7 @@
       Res-Q Food
     </ion-title>
     <ion-buttons slot="end">
-      <ion-icon slot="icon-only" color="light" name="notifications-outline"></ion-icon>
+      <ion-icon slot="icon-only" color="light" (click)="openNotification()" name="notifications-outline"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -32,40 +32,6 @@
       </ion-col>
     </ion-row>
   </div>
-
-  <!-- <div style="padding-top: 20px; padding-bottom: 15px;">
-    <h4>Donate</h4>
-    <ion-row>
-      <ion-col style="padding-left: 0;">
-        <ion-card class="ion-activatable" style="width: 100%; text-align: center; margin-left: 0;">
-          <ion-ripple-effect></ion-ripple-effect>
-          <img width="40px" style="padding-top: 10px;" src="../../assets/img/burger.png" />
-          <p style="text-align: center; margin-top: 3px; margin-bottom: 4px;">Food</p>
-        </ion-card>
-      </ion-col>
-      <ion-col>
-        <ion-card class="ion-activatable" style="width: 100%; text-align: center; margin-left: 0;">
-          <ion-ripple-effect></ion-ripple-effect>
-          <img width="40px" style="padding-top: 10px;" src="../../assets/img/education.png" />
-          <p style="text-align: center; margin-top: 3px; margin-bottom: 4px;">Education</p>
-        </ion-card>
-      </ion-col>
-      <ion-col>
-        <ion-card class="ion-activatable" style="width: 100%; text-align: center; margin-left: 0;">
-          <ion-ripple-effect></ion-ripple-effect>
-          <img width="40px" style="padding-top: 10px;" src="../../assets/img/water.png" />
-          <p style="text-align: center; margin-top: 3px; margin-bottom: 4px;">Water</p>
-        </ion-card>
-      </ion-col>
-      <ion-col>
-        <ion-card class="ion-activatable" style="width: 100%; text-align: center; margin-left: 0;">
-          <ion-ripple-effect></ion-ripple-effect>
-          <img width="40px" style="padding-top: 10px;" src="../../assets/img/laundry.png" />
-          <p style="text-align: center; margin-top: 3px; margin-bottom: 4px;">Clothes</p>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </div> -->
 
   <h4 style="padding-bottom: 15px; padding-top: 20px;">Latest Updates</h4>
   <ion-card class="ion-activatable">

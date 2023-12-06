@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: ProfilePage,
+  },
+  {
+    path: 'upload-img',
+    loadChildren: () => import('./upload-img/upload-img.module').then( m => m.UploadImgPageModule)
   }
 ];
 

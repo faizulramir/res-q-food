@@ -23,6 +23,14 @@ export class AuthPage {
     private route: ActivatedRoute,
   ) { }
 
+  async ionViewWillEnter() {
+    const token = await this.storage.get('token')
+
+    if (token) {
+      this.router.navigate(['/index/tabs/home'])
+    }
+  }
+
   goSignIn() {
     this.router.navigate(['auth/signin'])
   }

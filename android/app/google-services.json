@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "804899290601",
+    "project_id": "res-q-food",
+    "storage_bucket": "res-q-food.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804899290601:android:4dc491625d5e75e4e39f78",
+        "android_client_info": {
+          "package_name": "res.q.food"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIQ6naM3JUm1iIZhhQGohGDPjnzie5Pnc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

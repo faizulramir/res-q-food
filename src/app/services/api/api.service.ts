@@ -8,7 +8,7 @@ import { CapacitorHttp } from '@capacitor/core';
 })
 
 export class ApiService {
-  baseUrl:string = "http://127.0.0.1:8000/api";
+  baseUrl:string = "http://192.168.58.170:8000/api"; //dev
 
   constructor(
     private storage: StorageService,
@@ -161,6 +161,20 @@ export class ApiService {
     return response.data
   }
 
+  async updatePic(data:any) {
+    const token = await this.storage.get('token')
+
+    const options = {
+      url: this.baseUrl + "/user/update/pic",
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
+      data: data,
+    };
+
+    const response: HttpResponse = await CapacitorHttp.post(options);
+
+    return response.data
+  }
+
   async getUsers() {
     const token = await this.storage.get('token')
     const data = {}
@@ -175,11 +189,11 @@ export class ApiService {
     return response.data
   }
 
-  async notifyUser(tokens:any) {
+  async notifyUsers(title:any, id:any) {
     const token = await this.storage.get('token')
-    const data = { tokens: tokens }
+    const data = { title: title, id: id }
     const options = {
-      url: this.baseUrl + "/notifications/simulate",
+      url: this.baseUrl + "/notifications/send/all",
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
       data: data,
     };
