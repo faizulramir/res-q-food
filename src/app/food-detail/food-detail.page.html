@@ -32,17 +32,17 @@
       <h4>Mobile Number</h4>
       <p>{{ user.phone }}</p>
     </div>
-    <div *ngIf="user && user.type === 0">
+    <div>
       <h4>Status</h4>
-      <p style="color: red;">{{ food.status === 0 ? 'Pending' : '' }}</p>
+      <p>{{ food.status === 0 ? 'Pending' : 'Completed' }}</p>
     </div>
   </div>
 </ion-content>
 
 <div *ngIf="user && food">
-  <ion-footer class="ion-no-border ion-padding" *ngIf="user.type === 1 && food.status === 0">
+  <ion-footer class="ion-no-border ion-padding" *ngIf="userType === 1 && food.status === 0">
     <ion-toolbar style="text-align: center;">
-      <ion-button style="width: 100%;" size="large">Accept</ion-button>
+      <ion-button style="width: 100%;" size="large" (click)="goSubmit()">Accept</ion-button>
     </ion-toolbar>
   </ion-footer>
 </div>

@@ -19,6 +19,8 @@ export class ExploreContainerComponent {
   @Input() time?: string;
   @Input() address?: string;
   @Input() status?: any;
+  @Input() id?: any;
+  @Input() userID?: any;
 
   constructor(
     private modalCtrl: ModalController,
@@ -38,6 +40,7 @@ export class ExploreContainerComponent {
     }
 
     await this.storage.set('food', {
+      id: this.id,
       name: name,
       pic: this.pic,
       detail: this.detail,
@@ -45,6 +48,7 @@ export class ExploreContainerComponent {
       time: this.time,
       address: this.address,
       status: this.status,
+      userID: this.userID
     })
 
     this.router.navigate(['food-detail'])

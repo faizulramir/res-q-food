@@ -1,11 +1,31 @@
 <ion-header class="ion-no-border">
     <ion-toolbar>
-        <ion-title class="pacifico">
-            Completed
-        </ion-title>
+      <ion-title class="pacifico">
+          Completed
+      </ion-title>
     </ion-toolbar>
-</ion-header>
-
-<ion-content>
-    <app-explore-container name="completed"></app-explore-container>
-</ion-content>
+  </ion-header>
+  
+  <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  
+    <div class="xc" *ngIf="foods && foods.length === 0">
+      <h4>No completion yet.</h4>
+    </div>
+    <ion-list *ngFor="let food of foods">
+      <app-explore-container 
+        name="completed" 
+        [pic]="food.pic" 
+        [detail]="food.detail" 
+        [quantity]="food.quantity" 
+        [time]="food.time" 
+        [address]="food.address"
+        [status]="food.status"
+        [id]="food.id"
+        [userID]="food.user_id"
+      ></app-explore-container>
+    </ion-list>
+  </ion-content>
+  

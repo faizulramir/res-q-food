@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ApiService } from '../services/api/api.service';
 import { NotificationModalComponent } from '../notification-modal/notification-modal.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -25,16 +26,12 @@ export class HomePage {
   ) {}
 
   userType:any
-  
-  async ionViewWillEnter() {
-    const token = await this.storage.get('token')
-    const userType = await this.storage.get('userType')
+  user:any
+  foods:any
+  counts:any
 
-    if (!token) {
-      this.router.navigate([''])
-    }
-    
-    this.userType = userType ? userType : 0;
+  async ionViewWillEnter() {
+    this.setItems()
   }
 
   goDonate() {
@@ -46,5 +43,31 @@ export class HomePage {
       component: NotificationModalComponent,
     });
     modal.present();
+  }
+
+  goPending() {
+    this.router.navigate(['index/tabs/pending'])
+  }
+
+  async setItems() {
+    const token = await this.storage.get('token')
+    const userType = await this.storage.get('userType')
+
+    if (!token) {
+      this.router.navigate([''])
+    }
+    
+    this.userType = userType ? userType : 0;
+
+    this.user = await this.storage.get('user')
+    this.foods = await this.api.getFood({ status: '0', limit: true })
+    this.counts = this.foods.count
+    this.foods = this.foods.data
+
+    for (let index = 0; index < this.foods.length; index++) {
+      const element = this.foods[index];
+      this.foods[index].pic = JSON.parse(this.foods[index].pic)
+      this.foods[index].time = moment(this.foods[index].time).format('hh:mm A')
+    }
   }
 }

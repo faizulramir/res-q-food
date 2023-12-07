@@ -130,11 +130,10 @@ export class ApiService {
     return response.data
   }
 
-  async getUsers() {
+  async getUser(data:any) {
     const token = await this.storage.get('token')
-    const data = {}
     const options = {
-      url: this.baseUrl + "/user/all",
+      url: this.baseUrl + "/user/get",
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
       data: data,
     };
@@ -216,6 +215,20 @@ export class ApiService {
 
     const options = {
       url: this.baseUrl + "/food/get",
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
+      data: data,
+    };
+
+    const response: HttpResponse = await CapacitorHttp.post(options);
+
+    return response.data
+  }
+
+  async acceptFood(data:any) {
+    const token = await this.storage.get('token')
+
+    const options = {
+      url: this.baseUrl + "/food/accept",
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
       data: data,
     };

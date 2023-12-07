@@ -47,6 +47,7 @@ export class PostPage implements OnInit{
 
   async ionViewWillEnter() {
     this.user = await this.storage.get('user')
+    this.user.pic = JSON.parse(this.user.pic)
     this.post.user_id = this.user.id
   }
 

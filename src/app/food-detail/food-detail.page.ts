@@ -32,12 +32,58 @@ export class FoodDetailPage {
   
   async ionViewWillEnter() {
     this.food = await this.storage.get('food')
-    this.user = await this.storage.get('user')
+    this.userType = await this.storage.get('userType')
+    this.user = await this.api.getUser({ id: this.food.userID })
+    this.user = this.user.data
 
     this.user.pic = JSON.parse(this.user.pic)
   }
 
   goHistory() {
     this._location.back()
+  }
+
+  async acceptFood() {
+    let food = await this.api.acceptFood({ id: this.food.id })
+    if (food.msg) {
+      this.food = food.data
+      this.food.pic = JSON.parse(this.food.pic)
+      await this.storage.remove('food')
+      await this.storage.set('food', this.food)
+      this.presentToast(food.msg)
+      this.router.navigate(['index/tabs/completed'])
+    }
+  }
+
+  async goSubmit() {
+    const alert = await this.alertController.create({
+      header: 'Confirm Accept?',
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+          handler: () => {
+            console.log("Canceled");
+          },
+        },
+        {
+          text: "OK",
+          handler: () => {
+           this.acceptFood();
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  async presentToast(msg:any) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 1500,
+      position: 'bottom',
+    });
+
+    await toast.present();
   }
 }

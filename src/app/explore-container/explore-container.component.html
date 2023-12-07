@@ -4,7 +4,7 @@
     <img [src]="pic" />
   </ion-thumbnail>
   <p><b>{{ detail }}</b> <br> Food for {{ quantity }} peoples <br> Cooking Time: {{ time }} <br> Location: {{ address }}</p>
-  <ion-badge color="danger" slot="end">
+  <ion-badge color="{{ status === 0 ? 'danger' : 'success' }}" slot="end">
     {{ status === 0 ? 'Pending' : 'Completed' }}
   </ion-badge>
 </ion-item>

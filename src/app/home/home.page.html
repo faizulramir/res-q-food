@@ -53,22 +53,22 @@
     <div class="top-c ion-padding xc-2">
       <form style="width: 100%;">
         <h4 style="text-decoration: underline; color: white;">Request Status</h4>
-        <ion-row>
+        <ion-row *ngIf="counts">
           <ion-col>
             <ion-card style="text-align: center; width: 100%; height: 80px; margin-left: 0;">
-              <h4 style="margin-bottom: 0;">2</h4>
+              <h4 style="margin-bottom: 0;">{{ counts.new }}</h4>
               <p style="margin-top: 0;">New</p>
             </ion-card>
           </ion-col>
           <ion-col>
             <ion-card style="text-align: center; width: 100%; height: 80px; margin-left: 0;">
-              <h4 style="margin-bottom: 0;">0</h4>
+              <h4 style="margin-bottom: 0;">{{ counts.pending }}</h4>
               <p style="margin-top: 0;">Pending</p>
             </ion-card>
           </ion-col>
           <ion-col>
             <ion-card style="text-align: center; width: 100%; height: 80px; margin-left: 0;">
-              <h4 style="margin-bottom: 0;">13</h4>
+              <h4 style="margin-bottom: 0;">{{ counts.completed }}</h4>
               <p style="margin-top: 0;">Completed</p>
             </ion-card>
           </ion-col>
@@ -81,24 +81,12 @@
   <hr>
   <div class="bot-c ion-padding">
     <h4>New Request</h4>
-    <ion-list>
-      <ion-item button>
+    <ion-list *ngFor="let food of foods">
+      <ion-item button (click)="goPending()">
         <ion-thumbnail slot="start">
-          <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+          <img [src]="food.pic" />
         </ion-thumbnail>
-        <p><b>Paneer Masala, roti, chawai</b> <br> Food for 23 peoples <br> Cooking Time: 2:49 PM <br> Location: Adawad, India, 425320</p>
-      </ion-item>
-      <ion-item button>
-        <ion-thumbnail slot="start">
-          <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-        </ion-thumbnail>
-        <p><b>Paneer Masala, roti, chawai</b> <br> Food for 23 peoples <br> Cooking Time: 2:49 PM <br> Location: Adawad, India, 425320</p>
-      </ion-item>
-      <ion-item button>
-        <ion-thumbnail slot="start">
-          <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-        </ion-thumbnail>
-        <p><b>Paneer Masala, roti, chawai</b> <br> Food for 23 peoples <br> Cooking Time: 2:49 PM <br> Location: Adawad, India, 425320</p>
+        <p><b>{{ food.detail }}</b> <br> Food for {{ food.quantity }} peoples <br> Cooking Time: {{ food.time }} <br> Location: {{ food.address }}</p>
       </ion-item>
     </ion-list>
   </div>
