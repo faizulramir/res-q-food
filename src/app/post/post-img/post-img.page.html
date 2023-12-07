@@ -1,0 +1,51 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon slot="icon-only" name="arrow-back-outline" slot="end" (click)="goBack()"></ion-icon>
+    </ion-buttons>
+    <ion-title class="pacifico">Image Crop</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cropImage()" *ngIf="myImage">
+        <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+  <ion-button (click)="selectImage()" expand="full" *ngIf="!myImage"
+    >Select image</ion-button
+  >
+  <ion-row *ngIf="myImage">
+    <ion-col size="3" class="ion-text-center">
+      <ion-button fill="clear" (click)="rotate()">
+        <ion-icon name="refresh" slot="start"></ion-icon> Rotate
+      </ion-button>
+    </ion-col>
+    <ion-col size="3" class="ion-text-center">
+      <ion-button fill="clear" (click)="flipHorizontal()"> Flip X </ion-button>
+    </ion-col>
+    <ion-col size="3" class="ion-text-center">
+      <ion-button fill="clear" (click)="flipVertical()"> Flip Y </ion-button>
+    </ion-col>
+    <ion-col size="3" class="ion-text-center">
+      <ion-button fill="clear" (click)="discardChanges()"> Discard </ion-button>
+    </ion-col>
+  </ion-row>
+  
+  <image-cropper
+    #cropper
+    [imageBase64]="myImage"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="1 / 1"
+    format="png"
+    [hideResizeSquares]="isMobile"
+    [transform]="transform"
+    [autoCrop]="false"
+    (imageCropped)="imageCropped($event)"
+    (loadImageFailed)="loadImageFailed()"
+    (imageLoaded)="imageLoaded()"
+  ></image-cropper>
+ 
+  <img [src]="croppedImage" *ngIf="croppedImage" />
+</ion-content>

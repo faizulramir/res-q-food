@@ -29,3 +29,8 @@
     font-family: 'Pacifico';
     src: url('./assets/fonts/Pacifico.ttf');
 }
+
+.pacifico{
+    --ion-font-family:  'Pacifico'!important;
+    font-family:  'Pacifico' !important;
+}

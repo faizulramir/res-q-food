@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
   <div style="text-align: center; padding-top:20px;">
     <div class="user-container" (click)="takePicture()">
       <!-- <ion-avatar> -->
@@ -77,17 +77,4 @@
       <ion-button style="width: 100%;" size="large" (click)="goSubmit()">Submit</ion-button>
     </ion-item>
   </form>
-<!-- 
-  <image-cropper
-    #cropper
-    [imageBase64]="myImage"
-    [maintainAspectRatio]="true"
-    [aspectRatio]="1 / 1"
-    format="png"
-    [transform]="transform"
-    [autoCrop]="false"
-    (imageCropped)="imageCropped($event)"
-    (loadImageFailed)="loadImageFailed()"
-    (imageLoaded)="imageLoaded()"
-  ></image-cropper> -->
 </ion-content>

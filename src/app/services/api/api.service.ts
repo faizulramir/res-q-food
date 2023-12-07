@@ -8,7 +8,7 @@ import { CapacitorHttp } from '@capacitor/core';
 })
 
 export class ApiService {
-  baseUrl:string = "http://192.168.58.170:8000/api"; //dev
+  baseUrl:string = "http://192.168.100.2:8000/api"; //dev
 
   constructor(
     private storage: StorageService,
@@ -34,51 +34,6 @@ export class ApiService {
     const options = {
       url: this.baseUrl + "/register",
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      data: data,
-    };
-
-    const response: HttpResponse = await CapacitorHttp.post(options);
-
-    return response.data
-  }
-
-  async getDashboardData(id:any) {
-    const token = await this.storage.get('token')
-    const data = { id: id };
-
-    const options = {
-      url: this.baseUrl + "/dashboard",
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
-      data: data,
-    };
-
-    const response: HttpResponse = await CapacitorHttp.post(options);
-
-    return response.data
-  }
-
-  async getBudget(id:any, type:any = null) {
-    const token = await this.storage.get('token')
-    const data = { user_id: id, type: type };
-
-    const options = {
-      url: this.baseUrl + "/budget/get",
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
-      data: data,
-    };
-
-    const response: HttpResponse = await CapacitorHttp.post(options);
-
-    return response.data
-  }
-
-  async postBudget(id:any, type:any = null, value:any) {
-    const token = await this.storage.get('token')
-    const data = { user_id: id, type: type, value: value };
-
-    const options = {
-      url: this.baseUrl + "/budget/post",
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
       data: data,
     };
 
@@ -203,20 +158,6 @@ export class ApiService {
     return response.data
   }
 
-  async getUsageHistory(id:any,) {
-    const token = await this.storage.get('token')
-    const data = { id: id }
-    const options = {
-      url: this.baseUrl + "/usage/history",
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
-      data: data,
-    };
-
-    const response: HttpResponse = await CapacitorHttp.post(options);
-
-    return response.data
-  }
-
   async postForget(data:any) {
     const token = await this.storage.get('token')
     const options = {
@@ -248,6 +189,34 @@ export class ApiService {
     const options = {
       url: this.baseUrl + "/user/forget/changePassword",
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      data: data,
+    };
+
+    const response: HttpResponse = await CapacitorHttp.post(options);
+
+    return response.data
+  }
+
+  async postFood(data:any) {
+    const token = await this.storage.get('token')
+
+    const options = {
+      url: this.baseUrl + "/food/post",
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
+      data: data,
+    };
+
+    const response: HttpResponse = await CapacitorHttp.post(options);
+
+    return response.data
+  }
+
+  async getFood(data:any) {
+    const token = await this.storage.get('token')
+
+    const options = {
+      url: this.baseUrl + "/food/get",
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
       data: data,
     };
 

@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: PostPage,
+  },
+  {
+    path: 'post-img',
+    loadChildren: () => import('./post-img/post-img.module').then( m => m.PostImgPageModule)
   }
 ];
 

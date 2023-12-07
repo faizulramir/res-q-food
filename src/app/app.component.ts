@@ -6,6 +6,7 @@ import { ApiService } from './services/api/api.service';
 import { ModalController } from '@ionic/angular';
 import { NotificationModalComponent } from './notification-modal/notification-modal.component';
 import { register } from 'swiper/element/bundle';
+
 register();
 
 import {

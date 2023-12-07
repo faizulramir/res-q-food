@@ -65,9 +65,19 @@ export class ProfilePage implements OnInit{
   }
 
   async doLogout() {
-    await this.storage.remove('token')
-    await this.storage.remove('user')
-    await this.storage.remove('userType')
+    await this.storage.clear()
+    
+    this.profile = {
+      username: '',
+      phone: '',
+      email: '',
+      address: '',
+      password: '',
+      newPassword: '',
+      id: '',
+      pic: 'https://ionicframework.com/docs/img/demos/avatar.svg'
+    }
+
     this.router.navigate(['auth'])
   }
 

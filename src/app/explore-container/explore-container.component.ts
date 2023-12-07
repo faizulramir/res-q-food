@@ -13,7 +13,12 @@ import { ApiService } from '../services/api/api.service';
 export class ExploreContainerComponent {
 
   @Input() name?: string;
-  title:any
+  @Input() pic?: string;
+  @Input() detail?: string;
+  @Input() quantity?: string;
+  @Input() time?: string;
+  @Input() address?: string;
+  @Input() status?: any;
 
   constructor(
     private modalCtrl: ModalController,
@@ -25,16 +30,23 @@ export class ExploreContainerComponent {
     private route: ActivatedRoute,
   ) {}
 
-  goDetail(name:any) {
-    let navigationExtras: NavigationExtras = {
-      state: { 
-        params: {
-          name: name,
-        }
-      },
-      replaceUrl: false,
-    };
+  async goDetail(name:any) {
+    let food = await this.storage.get('food')
+    
+    if (food) {
+      await this.storage.remove('food')
+    }
 
-    this.router.navigate(['food-detail', navigationExtras])
+    await this.storage.set('food', {
+      name: name,
+      pic: this.pic,
+      detail: this.detail,
+      quantity: this.quantity,
+      time: this.time,
+      address: this.address,
+      status: this.status,
+    })
+
+    this.router.navigate(['food-detail'])
   }
 }

@@ -12,10 +12,13 @@ import {Location} from '@angular/common';
   templateUrl: './food-detail.page.html',
   styleUrls: ['./food-detail.page.scss'],
 })
-export class FoodDetailPage implements OnInit {
+export class FoodDetailPage {
 
   userType:any = 0
   name:any
+  food:any
+  user:any
+
   constructor(
     private modalCtrl: ModalController,
     private storage: StorageService,
@@ -26,18 +29,14 @@ export class FoodDetailPage implements OnInit {
     private route: ActivatedRoute,
     private _location: Location
   ) { }
-
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      const nav = this.router.getCurrentNavigation()
-      if (nav?.extras.state) {
-        let params = nav.extras.state['params']
-        console.log(params)
-        this.name = params.name
-      }
-    });
-  }
   
+  async ionViewWillEnter() {
+    this.food = await this.storage.get('food')
+    this.user = await this.storage.get('user')
+
+    this.user.pic = JSON.parse(this.user.pic)
+  }
+
   goHistory() {
     this._location.back()
   }
