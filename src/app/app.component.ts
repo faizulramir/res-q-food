@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
     // Show us the notification payload if the app is open on our device
     PushNotifications.addListener('pushNotificationReceived',
       async (notification: PushNotificationSchema) => {
-        await this.api.postNotifications(JSON.stringify(notification), notification.data.user_id)
+        await this.api.postNotifications(JSON.stringify(notification))
       }
     );
 

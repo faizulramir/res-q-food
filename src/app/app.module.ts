@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { FormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-const config: SocketIoConfig = { url: 'http://localhost:3000/', options: {} };
+const config: SocketIoConfig = { url: 'http://192.168.100.2:3000/', options: {} };
 import { ForgetComponent } from './forget/forget.component';
 import { NotificationModalComponent } from './notification-modal/notification-modal.component';
 

@@ -57,8 +57,8 @@ export class ApiService {
     return response.data
   }
 
-  async postNotifications(msg:any, id:any) {
-    const data = { msg: msg, id: id };
+  async postNotifications(msg:any) {
+    const data = { msg: msg };
     const token = await this.storage.get('token')
 
     const options = {
@@ -229,6 +229,34 @@ export class ApiService {
 
     const options = {
       url: this.baseUrl + "/food/accept",
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
+      data: data,
+    };
+
+    const response: HttpResponse = await CapacitorHttp.post(options);
+
+    return response.data
+  }
+
+  async postRoom(data:any) {
+    const token = await this.storage.get('token')
+
+    const options = {
+      url: this.baseUrl + "/room/post",
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
+      data: data,
+    };
+
+    const response: HttpResponse = await CapacitorHttp.post(options);
+
+    return response.data
+  }
+
+  async getRoom(data:any) {
+    const token = await this.storage.get('token')
+
+    const options = {
+      url: this.baseUrl + "/room/get",
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
       data: data,
     };

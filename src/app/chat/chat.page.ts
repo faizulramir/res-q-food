@@ -33,6 +33,7 @@ export class ChatPage implements OnInit {
   data:any = {
     chatName: ''
   }
+  
   ngOnInit() {
     this.socket.connect();
     this.socket.emit('setUserName', this.data.chatName);
@@ -42,6 +43,7 @@ export class ChatPage implements OnInit {
       this.messages.push(message);
     });
   }
+
   setUserActivityEvent() {
     this.socket.fromEvent('usersActivity').subscribe((data: any) => {
       if (data.event === 'chatLeft') {
@@ -51,11 +53,12 @@ export class ChatPage implements OnInit {
       }
     });
   }
+
   sendMessage() {
     this.socket.emit('sendTheMessage', { text: this.message });
     this.message = '';
   }
-
+  
   ionViewWillLeave() {
     this.socket.disconnect();
   }

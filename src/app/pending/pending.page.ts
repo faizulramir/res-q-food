@@ -33,20 +33,22 @@ export class PendingPage {
 
   async setItems() {
     this.user = await this.storage.get('user')
-    this.foods = await this.api.getFood({ status: '0' })
-    this.foods = this.foods.data
+    let foods = await this.api.getFood({ status: '0' })
+    foods = foods.data
 
     let oldFoods = await this.storage.get('foods')
     if (oldFoods) {
       await this.storage.remove('foods')
     }
-    await this.storage.set('foods', this.foods)
+    await this.storage.set('foods', foods)
 
-    for (let index = 0; index < this.foods.length; index++) {
-      const element = this.foods[index];
-      this.foods[index].pic = JSON.parse(this.foods[index].pic)
-      this.foods[index].time = moment(this.foods[index].time).format('hh:mm A')
+    for (let index = 0; index < foods.length; index++) {
+      const element = foods[index];
+      foods[index].pic = JSON.parse(foods[index].pic)
+      foods[index].time = moment(foods[index].time).format('hh:mm A')
     }
+
+    this.foods = foods
   }
 
   async handleRefresh(event:any) {
