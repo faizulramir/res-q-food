@@ -35,7 +35,6 @@ export class CompletedPage {
     this.user = await this.storage.get('user')
     this.foods = await this.api.getFood({ status: '1' })
     this.foods = this.foods.data
-
     for (let index = 0; index < this.foods.length; index++) {
       const element = this.foods[index];
       this.foods[index].pic = JSON.parse(this.foods[index].pic)

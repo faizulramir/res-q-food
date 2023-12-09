@@ -6,6 +6,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api/api.service';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-create-room',

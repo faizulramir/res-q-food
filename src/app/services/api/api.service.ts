@@ -143,6 +143,19 @@ export class ApiService {
     return response.data
   }
 
+  async getUsersOnline() {
+    const token = await this.storage.get('token')
+    const options = {
+      url: this.baseUrl + "/users/online",
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
+      data: {},
+    };
+
+    const response: HttpResponse = await CapacitorHttp.post(options);
+
+    return response.data
+  }
+
   async notifyUsers(title:any, id:any) {
     const token = await this.storage.get('token')
     const data = { title: title, id: id }

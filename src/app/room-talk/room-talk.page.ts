@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ApiService } from '../services/api/api.service';
 import { Socket } from 'ngx-socket-io';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-room-talk',
@@ -28,25 +29,43 @@ export class RoomTalkPage {
   rooms:any
   onlines: any[] = [];
   user:any
-  onlineUsers: any[] = [];
+  onlineUsers:any;
   con:any
   userStatus:any
-  
+  offline:any
+
   async ionViewWillEnter() {
     this.socket.connect();
     this.user = await this.storage.get('user')
     this.socket.emit('setOnline', this.user.id);
     this.userStatus = this.socket.fromEvent('userStatus').subscribe(async (data: any) => {
       if (data.event === 'chatLeft') {
-        this.onlineUsers = this.onlineUsers.filter((e:any) => e.id !== data.user)
+        let updateUser = await this.api.updateUser({ id: data.user, online: "0" })
+        if (updateUser.data) {
+          updateUser = updateUser.data
+          
+          for (let index = 0; index < updateUser.length; index++) {
+            const element = updateUser[index];
+            updateUser[index].pic = JSON.parse(updateUser[index].pic)
+          }
+  
+          this.onlineUsers = updateUser
+        }
       } else {
-        let user = await this.api.getUser({ id: data.user })
-        user.data.pic = JSON.parse(user.data.pic)
-        this.onlineUsers = this.onlineUsers.filter((e:any) => e.id !== data.user)
-        this.onlineUsers.push(user.data)
+        let updateUser = await this.api.updateUser({ id: data.user, online: "1" })
+        if (updateUser.data) {
+          updateUser = updateUser.data
+          
+          for (let index = 0; index < updateUser.length; index++) {
+            const element = updateUser[index];
+            updateUser[index].pic = JSON.parse(updateUser[index].pic)
+          }
+  
+          this.onlineUsers = updateUser
+        }
       }
     });
-
+    
     this.rooms = await this.api.getRoom({
       type: 'all'
     })
@@ -54,16 +73,27 @@ export class RoomTalkPage {
   }
 
   goChat(roomID:any) {
-    this.router.navigate(['chat'])
+    let navigationExtras: NavigationExtras = {
+      state: { 
+        params: {
+          roomID: roomID,
+        }
+      },
+      replaceUrl: false,
+    };
+    
+    this.router.navigate(['chat'], navigationExtras)
   }
 
-  ionViewWillLeave() {
-    this.socket.emit('setOffline', this.user.id);
-    this.userStatus.unsubscribe();
+  async ionViewWillLeave() {
+    this.offline = this.socket.emit('setOffline', this.user.id);
   }
 
   ionViewDidLeave() {
-    this.socket.disconnect();
+    if (this.offline) {
+      this.userStatus.unsubscribe();
+      this.socket.disconnect();
+    }
   }
   goCreate() {
     this.router.navigate(['index/tabs/room-talk/create-room'])

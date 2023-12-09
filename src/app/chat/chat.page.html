@@ -6,21 +6,38 @@
     <ion-title class="pacifico">
       Chat Room
     </ion-title>
+    <ion-buttons slot="end" id="open-online-users" expand="block">
+      <ion-icon slot="icon-only" name="people-outline"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
  
 <ion-content>
+  <ion-modal #modal trigger="open-online-users" [initialBreakpoint]="0.75" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+    <ng-template>
+      <ion-content>
+        <ion-list *ngFor="let user of onlineUsers">
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <img [src]="user.pic" />
+            </ion-thumbnail>
+            <p>{{ user.username }}</p>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
   <ion-grid>
     <ion-row *ngFor="let message of messages">
  
-      <ion-col size="9" *ngIf="message.user !== currentUser" class="message other-message">
-        <b>{{ message.user }}</b><br>
+      <ion-col size="9" *ngIf="message.user.username !== currentUser" class="message other-message">
+        <b>{{ message.user.username }}</b><br>
         <span>{{ message.msg }}</span>
         <div class="createdAt" text-right><br>{{ message.createdAt | date:'short' }}</div>
       </ion-col>
  
-      <ion-col offset="3" size="9" *ngIf="message.user === currentUser" class="message my-message">
-        <b>{{ message.user }}</b><br>
+      <ion-col offset="3" size="9" *ngIf="message.user.username === currentUser" class="message my-message">
+        <b>{{ message.user.username }}</b><br>
         <span>{{ message.msg }}</span>
         <div class="createdAt" text-right><br>{{ message.createdAt | date:'short' }}</div>
       </ion-col>
