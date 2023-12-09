@@ -7,6 +7,7 @@ import { AlertController } from '@ionic/angular';
 import { ApiService } from '../services/api/api.service';
 import { Socket } from 'ngx-socket-io';
 import * as moment from 'moment';
+import { App } from '@capacitor/app';
 
 @Component({
   selector: 'app-room-talk',
@@ -33,9 +34,16 @@ export class RoomTalkPage {
   con:any
   userStatus:any
   offline:any
+  userRoom:any
 
   async ionViewWillEnter() {
-    this.socket.connect();
+    this.getRoom('sana')
+
+    // this.socket.disconnect();
+    // this.socket.connect();
+    if (this.userStatus)  this.userStatus.unsubscribe();
+    if (this.userRoom)  this.userRoom.unsubscribe();
+    
     this.user = await this.storage.get('user')
     this.socket.emit('setOnline', this.user.id);
     this.userStatus = this.socket.fromEvent('userStatus').subscribe(async (data: any) => {
@@ -51,7 +59,7 @@ export class RoomTalkPage {
   
           this.onlineUsers = updateUser
         }
-      } else {
+      } else if (data.event === 'chatEnter') {
         let updateUser = await this.api.updateUser({ id: data.user, online: "1" })
         if (updateUser.data) {
           updateUser = updateUser.data
@@ -65,11 +73,27 @@ export class RoomTalkPage {
         }
       }
     });
-    
+
+    this.userRoom = this.socket.fromEvent('userRoom').subscribe(async (data: any) => {
+      this.getRoom('sini')
+    })
+  }
+
+  async getRoom(data:any) {
     this.rooms = await this.api.getRoom({
       type: 'all'
     })
-    this.rooms = this.rooms.data
+    this.rooms =  this.rooms.data
+    if (this.rooms.length > 0) {
+      for (let index = 0; index < this.rooms.length; index++) {
+        
+        if (this.rooms[index].users.length > 0) {
+          for (let userIndex = 0; userIndex < this.rooms[index].users.length; userIndex++) {
+            this.rooms[index].users[userIndex].pic = JSON.parse(this.rooms[index].users[userIndex].pic)
+          }
+        }
+      }
+    }
   }
 
   goChat(roomID:any) {
@@ -86,15 +110,9 @@ export class RoomTalkPage {
   }
 
   async ionViewWillLeave() {
-    this.offline = this.socket.emit('setOffline', this.user.id);
+    // this.offline = this.socket.emit('setOffline', this.user.id);
   }
 
-  ionViewDidLeave() {
-    if (this.offline) {
-      this.userStatus.unsubscribe();
-      this.socket.disconnect();
-    }
-  }
   goCreate() {
     this.router.navigate(['index/tabs/room-talk/create-room'])
   }

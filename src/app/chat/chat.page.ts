@@ -49,10 +49,23 @@ export class ChatPage implements OnInit {
       }
     });
 
+    // this.socket.disconnect()
+    // this.socket.connect()
+    
+  }
+
+  async ionViewWillEnter() {
+    // console.log('oi')
+    this.socket.disconnect()
+    this.socket.connect()
+    if (this.messageEvent) this.messageEvent.unsubscribe()
+    if (this.userEvent) this.userEvent.unsubscribe()
+
     this.user = await this.storage.get('user')
     this.currentUser = this.user.username
-    this.socket.connect()
+  
     this.socket.emit('setUserName', this.user.id)
+
     this.setUserActivityEvent()
 
     this.messageEvent = this.socket.fromEvent('message').subscribe(async (message:any) => {
@@ -73,6 +86,11 @@ export class ChatPage implements OnInit {
       }
 
       if (updateUserRoom.data) {
+        if (data.event !== 'chatLeft') {
+          this.socket.emit('setUserEnterRoom', this.user.id)
+        } else {
+          this.socket.emit('setUserLeaveRoom', this.user.id)
+        }
         for (let index = 0; index < updateUserRoom.data.length; index++) {
           const element = updateUserRoom.data[index];
           updateUserRoom.data[index].pic = JSON.parse(updateUserRoom.data[index].pic)
@@ -89,12 +107,27 @@ export class ChatPage implements OnInit {
   }
 
   ionViewWillLeave() {
+    // this.leftChat = this.socket.emit('setLeftChat', this.user.id)
+    // this.socket.emit('setUserLeaveRoom', this.user.id)
+    // this.socket.emit('setUserLeaveRoom', this.user.id)
     this.leftChat = this.socket.emit('setLeftChat', this.user.id)
+
+    // if (this.leftChat) {
+    //   this.messageEvent.unsubscribe()
+    // this.userEvent.unsubscribe()
+    // }
+    
+    // if (!this.userEvent) {
+    //   this.socket.disconnect()
+    // }
+    
   }
 
   ionViewDidLeave() {
-    this.messageEvent.unsubscribe()
-    this.userEvent.unsubscribe()
+    if (this.leftChat) {
+      this.messageEvent.unsubscribe()
+      this.userEvent.unsubscribe()
+    }
   }
 
   async presentToast(msg:any) {
@@ -108,8 +141,8 @@ export class ChatPage implements OnInit {
   }
 
   goBack() {
-    this.leftChat = this.socket.emit('setLeftChat', this.user.id)
-
-    this._location.back()
+    // this.leftChat = this.socket.emit('setLeftChat', this.user.id)
+    
+    this.router.navigate(['index/tabs/room-talk'])
   }
 }

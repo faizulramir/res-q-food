@@ -6,6 +6,8 @@ import { ApiService } from './services/api/api.service';
 import { ModalController } from '@ionic/angular';
 import { NotificationModalComponent } from './notification-modal/notification-modal.component';
 import { register } from 'swiper/element/bundle';
+import { App } from '@capacitor/app';
+import { Socket } from 'ngx-socket-io';
 
 register();
 
@@ -27,10 +29,27 @@ export class AppComponent implements OnInit {
     private router: Router,
     private storage: StorageService,
     private api: ApiService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private socket: Socket,
     ){}
 
   async ngOnInit() {
+    App.addListener('appStateChange', async ({ isActive }) => {
+      // this.socket.disconnect();
+      this.socket.connect();
+      let user = await this.storage.get('user')
+      if (user) {
+        if (!isActive) {
+          this.socket.emit('setOffline', user.id);
+          this.socket.emit('setLeftChat', user.id)
+          this.socket.emit('setUserLeaveRoom', user.id)
+        } else {
+          this.socket.emit('setOnline', user.id);
+          this.socket.emit('setUserName', user.id)
+        }
+      }
+    });
+    
     PushNotifications.requestPermissions().then(result => {
       if (result.receive === 'granted') {
         PushNotifications.register();

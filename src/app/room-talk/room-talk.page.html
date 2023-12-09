@@ -12,15 +12,22 @@
 <ion-content class="ion-padding">
   <h4>Online</h4>
   <div class="online-ngo">
-    <div class="scrolling-wrapper">
-      <div class="card ion-padding" style="text-align: center;"  *ngFor="let online of onlineUsers">
-        <div class="online-container">
-          <ion-avatar>
-            <ion-ripple-effect></ion-ripple-effect>
-            <img style="width: 80%; height: 80%;" [src]="online.pic ? online.pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
-          </ion-avatar>
-          <div class="online-icon"></div>
-          <p style="margin-top: 0 !important; margin-bottom: 0 !important; overflow: auto; width: 60px;">{{ online.username }}</p>
+    <div class="scrolling-wrapper" *ngIf="onlineUsers">
+      <div *ngIf="onlineUsers.length !== 0">
+        <div class="card ion-padding" style="text-align: center;" *ngFor="let online of onlineUsers">
+          <div class="online-container">
+            <ion-avatar>
+              <ion-ripple-effect></ion-ripple-effect>
+              <img style="width: 80%; height: 80%;" [src]="online.pic ? online.pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
+            </ion-avatar>
+            <div class="online-icon"></div>
+            <p style="margin-top: 0 !important; margin-bottom: 0 !important; overflow: auto; width: 60px;">{{ online.username }}</p>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="onlineUsers.length === 0">
+        <div class="card ion-padding" style="text-align: center;">
+          No online users
         </div>
       </div>
     </div>
@@ -35,10 +42,9 @@
         <br>
         <br>
         <span>
-          <img alt="Silhouette of a person's head" style="width: 15%; height: 15%; border-radius: 50%;" src="https://ionicframework.com/docs/img/demos/avatar.svg" />&nbsp;
-          <img alt="Silhouette of a person's head" style="width: 15%; height: 15%;  border-radius: 50%;" src="https://ionicframework.com/docs/img/demos/avatar.svg" />&nbsp;
-          <img alt="Silhouette of a person's head" style="width: 15%; height: 15%;  border-radius: 50%;" src="https://ionicframework.com/docs/img/demos/avatar.svg" />&nbsp;
-          <span>13+</span>
+          <img *ngFor="let user of room.users.slice(0, 4);" style="width: 15%; height: 15%; border-radius: 50%;" [src]="user.pic ? user.pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'" />&nbsp;
+          <span *ngIf="room.userCnt > 4">+ {{ room.userCnt - 5 }}</span>
+          <span *ngIf="!room.userCnt">No User in room.</span>
         </span>
       </p>
       <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
