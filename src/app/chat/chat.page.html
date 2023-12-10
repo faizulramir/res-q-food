@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
  
-<ion-content>
+<ion-content #content>
   <ion-modal #modal trigger="open-online-users" [initialBreakpoint]="0.75" [breakpoints]="[0, 0.25, 0.5, 0.75]">
     <ng-template>
       <ion-content>
@@ -29,17 +29,16 @@
   </ion-modal>
   <ion-grid>
     <ion-row *ngFor="let message of messages">
- 
       <ion-col size="9" *ngIf="message.user.username !== currentUser" class="message other-message">
         <b>{{ message.user.username }}</b><br>
         <span>{{ message.msg }}</span>
-        <div class="createdAt" text-right><br>{{ message.createdAt | date:'short' }}</div>
+        <div class="createdAt" text-right><br>{{ message.created_at | date:'short' }}</div>
       </ion-col>
  
       <ion-col offset="3" size="9" *ngIf="message.user.username === currentUser" class="message my-message">
         <b>{{ message.user.username }}</b><br>
         <span>{{ message.msg }}</span>
-        <div class="createdAt" text-right><br>{{ message.createdAt | date:'short' }}</div>
+        <div class="createdAt" text-right><br>{{ message.created_at | date:'short' }}</div>
       </ion-col>
     </ion-row>
   </ion-grid>

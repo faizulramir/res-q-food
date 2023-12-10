@@ -278,4 +278,32 @@ export class ApiService {
 
     return response.data
   }
+
+  async postChat(data:any) {
+    const token = await this.storage.get('token')
+
+    const options = {
+      url: this.baseUrl + "/chat/post",
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
+      data: data,
+    };
+
+    const response: HttpResponse = await CapacitorHttp.post(options);
+
+    return response.data
+  }
+
+  async getChat(data:any) {
+    const token = await this.storage.get('token')
+
+    const options = {
+      url: this.baseUrl + "/chat/get",
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization' : 'Bearer ' + token },
+      data: data,
+    };
+
+    const response: HttpResponse = await CapacitorHttp.post(options);
+
+    return response.data
+  }
 }

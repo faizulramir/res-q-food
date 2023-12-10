@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api/api.service';
 import { ForgetComponent } from 'src/app/forget/forget.component';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-signin',
@@ -22,6 +23,7 @@ export class SigninPage {
     private alertController: AlertController,
     private api: ApiService,
     private route: ActivatedRoute,
+    private socket: Socket,
   ) { }
 
   login: any = {
@@ -75,6 +77,8 @@ export class SigninPage {
           const pnToken = await this.storage.get('pnToken')
           let postPNToken = await this.api.postPNToken(pnToken, this.loginData.user.id)
           if (postPNToken) {
+            this.socket.connect();
+            this.socket.emit('setOnline', this.loginData.user.id);
             this.router.navigate(['index/tabs/home'])
           }
         }

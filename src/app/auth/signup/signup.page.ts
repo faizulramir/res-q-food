@@ -66,15 +66,12 @@ export class SignupPage implements OnInit {
       if (this.registerData.message) {
         this.presentToast(this.registerData.message)
       } else {
-        this.presentToast('Authenticating')
+        this.presentToast('Registering')
         if (this.registerData.status == 'Error') {
           this.presentToast(this.registerData.msg)
         } else {
-          this.presentToast(this.registerData.msg)
-          this.storage.set('token', this.registerData.token)
-          this.storage.set('user', this.registerData.user)
-          this.storage.set('userType', this.registerData.user.type)
-          this.router.navigate(['index/tabs/home'])
+          this.presentToast('Success!')
+          this.goSignIn()
         }
       }
     }

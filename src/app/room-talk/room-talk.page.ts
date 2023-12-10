@@ -37,7 +37,7 @@ export class RoomTalkPage {
   userRoom:any
 
   async ionViewWillEnter() {
-    this.getRoom('sana')
+    this.getRoom()
 
     // this.socket.disconnect();
     // this.socket.connect();
@@ -75,11 +75,11 @@ export class RoomTalkPage {
     });
 
     this.userRoom = this.socket.fromEvent('userRoom').subscribe(async (data: any) => {
-      this.getRoom('sini')
+      this.getRoom()
     })
   }
 
-  async getRoom(data:any) {
+  async getRoom() {
     this.rooms = await this.api.getRoom({
       type: 'all'
     })

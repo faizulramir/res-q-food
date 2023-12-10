@@ -39,13 +39,21 @@ export class AppComponent implements OnInit {
       this.socket.connect();
       let user = await this.storage.get('user')
       if (user) {
+        let userData = await this.api.getUser({ id: user.id})
+        userData = userData.data
         if (!isActive) {
-          this.socket.emit('setOffline', user.id);
-          this.socket.emit('setLeftChat', user.id)
-          this.socket.emit('setUserLeaveRoom', user.id)
+          this.socket.emit('setOffline', userData.id);
+          this.socket.emit('setUserLeaveRoom', userData.id)
+          this.socket.emit('setLeftChat', userData.id)
+          // if (userData.inRoom) {
+          //   this.socket.emit('setLeftChat', userData.id)
+          //   this.socket.emit('setUserLeaveRoom', userData.id)
+          // }
         } else {
-          this.socket.emit('setOnline', user.id);
-          this.socket.emit('setUserName', user.id)
+          this.socket.emit('setOnline', userData.id);
+          if (userData.inRoom) {
+            this.socket.emit('setUserName', userData.id)
+          }
         }
       }
     });

@@ -3,7 +3,7 @@
     <ion-title class="pacifico">
       Room Talk
     </ion-title>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" *ngIf="user && user.type === 1">
       <ion-icon slot="icon-only" name="add-circle-outline" slot="end" (click)="goCreate()"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
@@ -51,7 +51,7 @@
     </ion-item>
   </ion-list>
 
-  <div class="ion-padding" style="padding-top: 20px;">
+  <div class="ion-padding" style="padding-top: 20px;" *ngIf="user && user.type === 1">
     <ion-button style="width: 100%;" size="large" (click)="goCreate()">
       Create Room
       <ion-icon name="add-circle-outline" slot="end"></ion-icon>

@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ApiService } from '../services/api/api.service';
 import { ForgetComponent } from '../forget/forget.component';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-profile',
@@ -22,6 +23,7 @@ export class ProfilePage implements OnInit{
     private alertController: AlertController,
     private api: ApiService,
     private route: ActivatedRoute,
+    private socket: Socket,
   ) {}
 
   profile:any = {
@@ -65,8 +67,10 @@ export class ProfilePage implements OnInit{
   }
 
   async doLogout() {
+    this.socket.emit('setOffline', this.profile.id);
+    this.socket.emit('setUserLeaveRoom', this.profile.id)
+    this.socket.emit('setLeftChat', this.profile.id)
     await this.storage.clear()
-    
     this.profile = {
       username: '',
       phone: '',

@@ -63,17 +63,29 @@ export class ChatPage implements OnInit {
 
     this.user = await this.storage.get('user')
     this.currentUser = this.user.username
-  
+    let msgs = await this.api.getChat({ room_id: this.roomID })
+    this.messages = msgs.data
+    this.goToBottom()
+
     this.socket.emit('setUserName', this.user.id)
 
     this.setUserActivityEvent()
 
     this.messageEvent = this.socket.fromEvent('message').subscribe(async (message:any) => {
+      if (message.user === this.user.id) {
+        let updateMsg = await this.api.postChat({ msg: message.msg, user_id: this.user.id, room_id: this.roomID })
+      }
       let user = this.onlineUsers.find((e:any) => e.id == message.user)
       message.user = user
       this.messages.push(message)
-      this.content.scrollToBottom(1500);
+      this.goToBottom()
     });
+  }
+
+  goToBottom() {
+    setTimeout(() => {
+      this.content.scrollToBottom();
+    }, 100);
   }
 
   setUserActivityEvent() {
@@ -84,6 +96,10 @@ export class ChatPage implements OnInit {
       } else {
         updateUserRoom = await this.api.updateUser({ id: data.user, roomID: this.roomID, currentRoom: this.roomID  })
       }
+
+      let user = await this.api.getUser({ id: this.user.id })
+      user = user.data
+      if (!user.inRoom) this.router.navigate(['index/tabs/room-talk'])
 
       if (updateUserRoom.data) {
         if (data.event !== 'chatLeft') {
