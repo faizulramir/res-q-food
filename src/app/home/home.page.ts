@@ -60,14 +60,23 @@ export class HomePage {
     this.userType = userType ? userType : 0;
 
     this.user = await this.storage.get('user')
-    this.foods = await this.api.getFood({ status: '0', limit: true })
-    this.counts = this.foods.count
-    this.foods = this.foods.data
 
+    if (this.user.type == 0) {
+      this.foods = await this.api.getFood({ user_id: this.user.id })
+      this.foods = this.foods.data
+      this.foods = this.foods.filter((e:any) =>  e.status == 1 && moment(e.updated_at).isSame(new Date(), 'day'))
+      
+    } else {
+      this.foods = await this.api.getFood({ status: '0', limit: true })
+      this.counts = this.foods.count
+      this.foods = this.foods.data
+    }
+    
     for (let index = 0; index < this.foods.length; index++) {
       const element = this.foods[index];
       this.foods[index].pic = JSON.parse(this.foods[index].pic)
       this.foods[index].time = moment(this.foods[index].time).format('hh:mm A')
     }
+    
   }
 }

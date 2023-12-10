@@ -67,10 +67,11 @@ export class ProfilePage implements OnInit{
   }
 
   async doLogout() {
+    this.socket.connect()
     this.socket.emit('setOffline', this.profile.id);
     this.socket.emit('setUserLeaveRoom', this.profile.id)
     this.socket.emit('setLeftChat', this.profile.id)
-    await this.storage.clear()
+    
     this.profile = {
       username: '',
       phone: '',
@@ -82,7 +83,11 @@ export class ProfilePage implements OnInit{
       pic: 'https://ionicframework.com/docs/img/demos/avatar.svg'
     }
 
-    this.router.navigate(['auth'])
+    let userOffline = await this.api.updateUser({ id: this.user.id, online: "0" })
+    if (userOffline.data) {
+      await this.storage.clear()
+      this.router.navigate(['auth'])
+    }
   }
 
   async confirmLogout() {

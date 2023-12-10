@@ -73,7 +73,17 @@ export class ChatPage implements OnInit {
 
     this.messageEvent = this.socket.fromEvent('message').subscribe(async (message:any) => {
       if (message.user === this.user.id) {
+        // let user = this.onlineUsers.find((e:any) => e.id == message.user)
+        // message.user = user
+        this.messages.push({
+          msg: 'Sending..',
+          user: "system",
+          created_at: new Date()
+        })
         let updateMsg = await this.api.postChat({ msg: message.msg, user_id: this.user.id, room_id: this.roomID })
+        if (updateMsg) {
+          this.messages.pop()
+        }
       }
       let user = this.onlineUsers.find((e:any) => e.id == message.user)
       message.user = user

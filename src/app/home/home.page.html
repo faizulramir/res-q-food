@@ -34,18 +34,17 @@
   </div>
 
   <h4 style="padding-bottom: 15px; padding-top: 20px;">Latest Updates</h4>
-  <ion-card class="ion-activatable">
-    <ion-ripple-effect></ion-ripple-effect>
-    <img src="https://ionicframework.com/docs/img/demos/card-media.png" />
-    <ion-card-header>
-      <ion-card-title>Card Title</ion-card-title>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-    </ion-card-header>
+  <ion-list *ngFor="let food of foods">
+    <ion-item button>
+      <ion-thumbnail slot="start">
+        <img [src]="food.pic" />
+      </ion-thumbnail>
+      <p><b>{{ food.detail }}</b> <br> Food for {{ food.quantity }} peoples <br> Cooking Time: {{ food.time }} <br> Location: {{ food.address }}</p>
+    </ion-item>
+  </ion-list>
+
+  <p *ngIf="foods.length === 0">No recent updates.</p>
   
-    <ion-card-content>
-      Here's a small text description for the card content. Nothing more, nothing less.
-    </ion-card-content>
-  </ion-card>
 </ion-content>
 
 <ion-content *ngIf="userType === 1 || userType === '1'">

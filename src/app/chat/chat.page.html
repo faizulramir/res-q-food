@@ -19,7 +19,7 @@
         <ion-list *ngFor="let user of onlineUsers">
           <ion-item>
             <ion-thumbnail slot="start">
-              <img [src]="user.pic" />
+              <img [src]="user.pic ? user.pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
             </ion-thumbnail>
             <p>{{ user.username }}</p>
           </ion-item>
@@ -29,12 +29,16 @@
   </ion-modal>
   <ion-grid>
     <ion-row *ngFor="let message of messages">
-      <ion-col size="9" *ngIf="message.user.username !== currentUser" class="message other-message">
+      <ion-col size="9" *ngIf="message.user !== 'system' && message.user.username !== currentUser" class="message other-message">
         <b>{{ message.user.username }}</b><br>
         <span>{{ message.msg }}</span>
         <div class="createdAt" text-right><br>{{ message.created_at | date:'short' }}</div>
       </ion-col>
- 
+      
+      <ion-col offset="9" size="3" *ngIf="message.user === 'system'" class="message my-message">
+        <span>{{ message.msg }}</span>
+      </ion-col>
+
       <ion-col offset="3" size="9" *ngIf="message.user.username === currentUser" class="message my-message">
         <b>{{ message.user.username }}</b><br>
         <span>{{ message.msg }}</span>
@@ -42,7 +46,9 @@
       </ion-col>
     </ion-row>
   </ion-grid>
- 
+  <div class="xc" *ngIf="messages && messages.length === 0">
+    <p>No chats yet.</p>
+  </div>
 </ion-content>
  
 <ion-footer>

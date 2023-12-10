@@ -80,16 +80,19 @@ export class RoomTalkPage {
   }
 
   async getRoom() {
-    this.rooms = await this.api.getRoom({
-      type: 'all'
-    })
-    this.rooms =  this.rooms.data
-    if (this.rooms.length > 0) {
-      for (let index = 0; index < this.rooms.length; index++) {
-        
-        if (this.rooms[index].users.length > 0) {
-          for (let userIndex = 0; userIndex < this.rooms[index].users.length; userIndex++) {
-            this.rooms[index].users[userIndex].pic = JSON.parse(this.rooms[index].users[userIndex].pic)
+    let user = await this.storage.get('user')
+    if (user) {
+      this.rooms = await this.api.getRoom({
+        type: 'all'
+      })
+      this.rooms =  this.rooms.data
+      if (this.rooms.length > 0) {
+        for (let index = 0; index < this.rooms.length; index++) {
+          
+          if (this.rooms[index].users.length > 0) {
+            for (let userIndex = 0; userIndex < this.rooms[index].users.length; userIndex++) {
+              this.rooms[index].users[userIndex].pic = JSON.parse(this.rooms[index].users[userIndex].pic)
+            }
           }
         }
       }

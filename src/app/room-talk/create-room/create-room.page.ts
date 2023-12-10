@@ -67,6 +67,7 @@ export class CreateRoomPage {
 
     if (room.data && user.type == 1) {
       this.presentToast(room.msg)
+      this._location.back()
     }
   }
 
