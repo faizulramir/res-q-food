@@ -86,7 +86,12 @@ export class AppComponent implements OnInit {
     // Show us the notification payload if the app is open on our device
     PushNotifications.addListener('pushNotificationReceived',
       async (notification: PushNotificationSchema) => {
-        await this.api.postNotifications(JSON.stringify(notification))
+        console.log(notification)
+        if (notification.data.multi === 'false' || notification.data.multi === false) {
+          await this.api.postNotifications(JSON.stringify(notification), notification.data.multi, notification.data.user_id)
+        } else {
+          await this.api.postNotifications(JSON.stringify(notification), notification.data.multi, null)
+        }
       }
     );
 

@@ -7,6 +7,7 @@ import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api/api.service';
 import { Socket } from 'ngx-socket-io';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-room',
@@ -24,6 +25,7 @@ export class CreateRoomPage {
     private alertController: AlertController,
     private api: ApiService,
     private route: ActivatedRoute,
+    private loadingCtrl: LoadingController
   ) { }
 
   title:any
@@ -34,6 +36,11 @@ export class CreateRoomPage {
     }
 
     return this.goSubmit()
+  }
+
+  async showLoading() {
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
   }
 
   async goSubmit() {
@@ -59,6 +66,8 @@ export class CreateRoomPage {
   }
 
   async doSubmit() {
+    this.showLoading()
+
     let user = await this.storage.get('user')
     let room = await this.api.postRoom({
       title: this.title,
@@ -69,6 +78,7 @@ export class CreateRoomPage {
       this.presentToast(room.msg)
       this._location.back()
     }
+    this.loadingCtrl.dismiss();
   }
 
   async presentToast(msg:any) {

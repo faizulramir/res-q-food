@@ -21,6 +21,7 @@ export class ExploreContainerComponent {
   @Input() status?: any;
   @Input() id?: any;
   @Input() userID?: any;
+  @Input() acceptBy?: any;
 
   constructor(
     private modalCtrl: ModalController,
@@ -48,7 +49,8 @@ export class ExploreContainerComponent {
       time: this.time,
       address: this.address,
       status: this.status,
-      userID: this.userID
+      userID: this.userID,
+      acceptBy: this.acceptBy
     })
 
     this.router.navigate(['food-detail'])

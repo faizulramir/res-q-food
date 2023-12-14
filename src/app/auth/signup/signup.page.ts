@@ -5,6 +5,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api/api.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-signup',
@@ -21,6 +22,7 @@ export class SignupPage implements OnInit {
     private alertController: AlertController,
     private api: ApiService,
     private route: ActivatedRoute,
+    private loadingCtrl: LoadingController
   ) { }
 
   register:any = {
@@ -47,6 +49,11 @@ export class SignupPage implements OnInit {
     });
   }
 
+  async showLoading() {
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
+  }
+
   async ionViewWillEnter() {
     const token = await this.storage.get('token')
     
@@ -60,10 +67,12 @@ export class SignupPage implements OnInit {
       return this.presentToast("Please fill in required fields!")
     }
 
+    this.showLoading()
     this.registerData = await this.api.postRegister(this.register)
 
     if (this.registerData) {
       if (this.registerData.message) {
+        this.loadingCtrl.dismiss();
         this.presentToast(this.registerData.message)
       } else {
         this.presentToast('Registering')
@@ -73,6 +82,7 @@ export class SignupPage implements OnInit {
           this.presentToast('Success!')
           this.goSignIn()
         }
+        this.loadingCtrl.dismiss();
       }
     }
   }

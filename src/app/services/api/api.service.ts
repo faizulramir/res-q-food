@@ -8,7 +8,7 @@ import { CapacitorHttp } from '@capacitor/core';
 })
 
 export class ApiService {
-  baseUrl:string = "http://192.168.100.2:8000/api"; //dev
+  baseUrl:string = "https://resq.fzlxtech.my/api"; //dev
 
   constructor(
     private storage: StorageService,
@@ -57,8 +57,8 @@ export class ApiService {
     return response.data
   }
 
-  async postNotifications(msg:any) {
-    const data = { msg: msg };
+  async postNotifications(msg:any, multi:any, id:any) {
+    const data = { msg: msg, multi: multi, id: id };
     const token = await this.storage.get('token')
 
     const options = {

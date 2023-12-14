@@ -7,6 +7,7 @@ import { AlertController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api/api.service';
 import { ForgetComponent } from 'src/app/forget/forget.component';
 import { Socket } from 'ngx-socket-io';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-signin',
@@ -24,6 +25,7 @@ export class SigninPage {
     private api: ApiService,
     private route: ActivatedRoute,
     private socket: Socket,
+    private loadingCtrl: LoadingController
   ) { }
 
   login: any = {
@@ -39,6 +41,11 @@ export class SigninPage {
     if (token) {
       this.router.navigate(['/index/tabs/home'])
     }
+  }
+
+  async showLoading() {
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
   }
   
   goSignUp(type:any) {
@@ -62,12 +69,14 @@ export class SigninPage {
   }
 
   async doLogin() {
+    this.showLoading()
     if (this.login.username && this.login.password) {
       this.loginData = await this.api.postLogin(this.login)
       if (this.loginData) {
         this.presentToast('Authenticating')
         if (this.loginData.status == 'Error') {
           this.presentToast(this.loginData.msg)
+          this.loadingCtrl.dismiss();
         } else {
           this.presentToast(this.loginData.msg)
           this.storage.set('token', this.loginData.token)
@@ -76,11 +85,14 @@ export class SigninPage {
 
           const pnToken = await this.storage.get('pnToken')
           let postPNToken = await this.api.postPNToken(pnToken, this.loginData.user.id)
+          
           if (postPNToken) {
             this.socket.connect();
             this.socket.emit('setOnline', this.loginData.user.id);
             this.router.navigate(['index/tabs/home'])
           }
+
+          this.loadingCtrl.dismiss();
         }
       }
     } else {

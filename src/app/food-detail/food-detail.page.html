@@ -27,14 +27,20 @@
     <br>
     <h4>Address</h4>
     <p>{{ food.address }}</p>
-    <br>
     <div *ngIf="user && user.type === 1">
+      <br>
       <h4>Mobile Number</h4>
       <p>{{ user.phone }}</p>
     </div>
     <div>
+      <br>
       <h4>Status</h4>
       <p>{{ food.status === 0 ? 'Pending' : 'Completed' }}</p>
+    </div>
+    <div *ngIf="acceptBy">
+      <br>
+      <h4>Accepted By</h4>
+      <p>{{ acceptBy.username }}</p>
     </div>
   </div>
 </ion-content>

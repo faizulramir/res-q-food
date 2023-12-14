@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ApiService } from '../services/api/api.service';
 import {Location} from '@angular/common';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-food-detail',
@@ -18,6 +19,8 @@ export class FoodDetailPage {
   name:any
   food:any
   user:any
+  logUser:any
+  acceptBy:any
 
   constructor(
     private modalCtrl: ModalController,
@@ -27,13 +30,17 @@ export class FoodDetailPage {
     private alertController: AlertController,
     private api: ApiService,
     private route: ActivatedRoute,
-    private _location: Location
+    private _location: Location,
+    private loadingCtrl: LoadingController
   ) { }
   
   async ionViewWillEnter() {
     this.food = await this.storage.get('food')
     this.userType = await this.storage.get('userType')
+    this.logUser = await this.storage.get('user')
     this.user = await this.api.getUser({ id: this.food.userID })
+    this.acceptBy = await this.api.getUser({ id: this.food.acceptBy })
+    this.acceptBy = this.acceptBy.data
     this.user = this.user.data
 
     this.user.pic = JSON.parse(this.user.pic)
@@ -44,7 +51,8 @@ export class FoodDetailPage {
   }
 
   async acceptFood() {
-    let food = await this.api.acceptFood({ id: this.food.id })
+    this.showLoading()
+    let food = await this.api.acceptFood({ id: this.food.id, accept_by: this.logUser.id })
     if (food.msg) {
       this.food = food.data
       this.food.pic = JSON.parse(this.food.pic)
@@ -53,6 +61,12 @@ export class FoodDetailPage {
       this.presentToast(food.msg)
       this.router.navigate(['index/tabs/completed'])
     }
+    this.loadingCtrl.dismiss();
+  }
+
+  async showLoading() {
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
   }
 
   async goSubmit() {

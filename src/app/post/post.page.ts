@@ -6,6 +6,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ApiService } from '../services/api/api.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-post',
@@ -22,6 +23,7 @@ export class PostPage implements OnInit{
     private alertController: AlertController,
     private api: ApiService,
     private route: ActivatedRoute,
+    private loadingCtrl: LoadingController
   ) {}
   
   post:any = {
@@ -95,7 +97,14 @@ export class PostPage implements OnInit{
     return this.presentToast('Please fill in all the fields!')
   }
 
+  async showLoading() {
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
+  }
+
   async doSubmit() {
+    this.showLoading()
+
     let data = this.post
     data.pic = JSON.stringify(data.pic)
     
@@ -103,6 +112,7 @@ export class PostPage implements OnInit{
     if (postFood.msg) {
       this.clearData()
       this.presentToast(postFood.msg)
+      this.loadingCtrl.dismiss();
       this.router.navigate(['index/tabs/history'])
     }
   }

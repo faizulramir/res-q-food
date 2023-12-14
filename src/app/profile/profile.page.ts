@@ -7,6 +7,7 @@ import { AlertController } from '@ionic/angular';
 import { ApiService } from '../services/api/api.service';
 import { ForgetComponent } from '../forget/forget.component';
 import { Socket } from 'ngx-socket-io';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -24,6 +25,7 @@ export class ProfilePage implements OnInit{
     private api: ApiService,
     private route: ActivatedRoute,
     private socket: Socket,
+    private loadingCtrl: LoadingController
   ) {}
 
   profile:any = {
@@ -67,6 +69,8 @@ export class ProfilePage implements OnInit{
   }
 
   async doLogout() {
+    this.showLoading()
+
     this.socket.connect()
     this.socket.emit('setOffline', this.profile.id);
     this.socket.emit('setUserLeaveRoom', this.profile.id)
@@ -88,6 +92,7 @@ export class ProfilePage implements OnInit{
       await this.storage.clear()
       this.router.navigate(['auth'])
     }
+    this.loadingCtrl.dismiss();
   }
 
   async confirmLogout() {
@@ -110,6 +115,11 @@ export class ProfilePage implements OnInit{
       ],
     });
     await alert.present();
+  }
+
+  async showLoading() {
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
   }
 
   async goForget() {
@@ -137,7 +147,7 @@ export class ProfilePage implements OnInit{
         {
           text: "OK",
           handler: () => {
-           this.checkInputs();
+            this.postUser()
           },
         },
       ],
@@ -154,7 +164,7 @@ export class ProfilePage implements OnInit{
       return this.presentToast("Please fill Password fields!")
     }
     
-    return this.postUser()
+    return this.goSubmit()
   }
 
   async presentToast(msg:any) {
@@ -168,6 +178,7 @@ export class ProfilePage implements OnInit{
   }
 
   async postUser() {
+    this.showLoading()
     const user = await this.api.updateUser(this.profile)
 
     if (user.data) {
@@ -179,6 +190,7 @@ export class ProfilePage implements OnInit{
     }
 
     this.presentToast(user.msg)
+    this.loadingCtrl.dismiss();
   }
   
   async takePicture () {
