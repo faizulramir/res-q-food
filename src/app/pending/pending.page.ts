@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { StorageService } from '../services/storage/storage.service';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
@@ -12,7 +12,7 @@ import * as moment from 'moment';
   templateUrl: 'pending.page.html',
   styleUrls: ['pending.page.scss']
 })
-export class PendingPage {
+export class PendingPage implements OnInit{
 
   constructor(
     private modalCtrl: ModalController,
@@ -26,9 +26,25 @@ export class PendingPage {
 
   user:any
   foods:any
+  foodID:any = null
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const nav = this.router.getCurrentNavigation()
+      if (nav?.extras.state) {
+        let params = nav.extras.state['params']
+        
+        this.foodID = params.foodID
+      }
+    });
+  }
 
   async ionViewWillEnter() {
     this.setItems()
+  }
+
+  ionViewWillLeave() {
+    this.foodID = null
   }
 
   async setItems() {

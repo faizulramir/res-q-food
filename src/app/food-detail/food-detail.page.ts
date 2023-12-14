@@ -46,7 +46,9 @@ export class FoodDetailPage {
     this.user.pic = JSON.parse(this.user.pic)
   }
 
-  goHistory() {
+  async goHistory() {
+    this.food = await this.storage.remove('food')
+
     this._location.back()
   }
 

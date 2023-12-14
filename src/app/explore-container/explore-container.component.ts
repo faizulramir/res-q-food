@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { StorageService } from '../services/storage/storage.service';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import { ApiService } from '../services/api/api.service';
   templateUrl: './explore-container.component.html',
   styleUrls: ['./explore-container.component.scss'],
 })
-export class ExploreContainerComponent {
+export class ExploreContainerComponent implements OnInit{
 
   @Input() name?: string;
   @Input() pic?: string;
@@ -22,6 +22,7 @@ export class ExploreContainerComponent {
   @Input() id?: any;
   @Input() userID?: any;
   @Input() acceptBy?: any;
+  @Input() foodID?: any;
 
   constructor(
     private modalCtrl: ModalController,
@@ -32,6 +33,12 @@ export class ExploreContainerComponent {
     private api: ApiService,
     private route: ActivatedRoute,
   ) {}
+
+  ngOnInit() {
+      if (this.foodID) {
+        this.goDetail(this.name)
+      }
+  }
 
   async goDetail(name:any) {
     let food = await this.storage.get('food')

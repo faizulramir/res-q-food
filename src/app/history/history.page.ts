@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { StorageService } from '../services/storage/storage.service';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
@@ -12,7 +12,7 @@ import * as moment from 'moment';
   templateUrl: 'history.page.html',
   styleUrls: ['history.page.scss']
 })
-export class HistoryPage {
+export class HistoryPage implements OnInit{
 
   constructor(
     private modalCtrl: ModalController,
@@ -24,11 +24,28 @@ export class HistoryPage {
     private route: ActivatedRoute,
   ) {}
 
+  foodID:any = null
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const nav = this.router.getCurrentNavigation()
+      if (nav?.extras.state) {
+        let params = nav.extras.state['params']
+        
+        this.foodID = params.foodID
+      }
+    });
+  }
+
   user:any
   foods:any
 
   async ionViewWillEnter() {
     this.setItems()
+  }
+
+  ionViewWillLeave() {
+    this.foodID = null
   }
 
   async setItems() {

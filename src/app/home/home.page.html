@@ -35,7 +35,7 @@
 
   <h4 style="padding-bottom: 15px; padding-top: 20px;">Latest Updates</h4>
   <ion-list *ngFor="let food of foods">
-    <ion-item button>
+    <ion-item button (click)="goHistory(food.id)">
       <ion-thumbnail slot="start">
         <img [src]="food.pic" />
       </ion-thumbnail>
@@ -43,7 +43,7 @@
     </ion-item>
   </ion-list>
 
-  <p *ngIf="foods.length === 0">No recent updates.</p>
+  <p *ngIf="foods && foods.length === 0">No recent updates.</p>
   
 </ion-content>
 
@@ -81,7 +81,7 @@
   <div class="bot-c ion-padding">
     <h4>New Request</h4>
     <ion-list *ngFor="let food of foods">
-      <ion-item button (click)="goPending()">
+      <ion-item button (click)="goPending(food.id)">
         <ion-thumbnail slot="start">
           <img [src]="food.pic" />
         </ion-thumbnail>

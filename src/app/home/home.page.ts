@@ -45,8 +45,29 @@ export class HomePage {
     modal.present();
   }
 
-  goPending() {
-    this.router.navigate(['index/tabs/pending'])
+  goHistory(id:any) {
+    let navigationExtras: NavigationExtras = {
+      state: { 
+        params: {
+          foodID: id,
+        }
+      },
+      replaceUrl: false,
+    };
+    
+    this.router.navigate(['index/tabs/history'], navigationExtras)
+  }
+
+  goPending(id:any) {
+    let navigationExtras: NavigationExtras = {
+      state: { 
+        params: {
+          foodID: id,
+        }
+      },
+      replaceUrl: false,
+    };
+    this.router.navigate(['index/tabs/pending'], navigationExtras)
   }
 
   async setItems() {
