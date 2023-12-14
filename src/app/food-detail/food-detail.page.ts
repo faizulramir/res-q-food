@@ -47,8 +47,8 @@ export class FoodDetailPage {
   }
 
   async goHistory() {
-    this.food = await this.storage.remove('food')
-
+    await this.storage.remove('food')
+    this.food = undefined
     this._location.back()
   }
 
