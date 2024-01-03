@@ -85,7 +85,7 @@ export class HomePage {
     if (this.user.type == 0) {
       this.foods = await this.api.getFood({ user_id: this.user.id })
       this.foods = this.foods.data
-      this.foods = this.foods.filter((e:any) =>  e.status == 1 && moment(e.updated_at).isSame(new Date(), 'day'))
+      // this.foods = this.foods.filter((e:any) =>  e.status == 1 && moment(e.updated_at).isSame(new Date(), 'day'))
       
     } else {
       this.foods = await this.api.getFood({ status: '0', limit: true })
@@ -97,6 +97,10 @@ export class HomePage {
       const element = this.foods[index];
       this.foods[index].pic = JSON.parse(this.foods[index].pic)
       this.foods[index].time = moment(this.foods[index].time).format('hh:mm A')
+      if (this.foods[index].accept_by !== null && this.foods[index].accept_by !== 0) {
+        this.foods[index].accepted_name = await this.api.getUser({ id: this.foods[index].accept_by })
+        this.foods[index].accepted_name = this.foods[index].accepted_name.data.username
+      }
     }
     
   }

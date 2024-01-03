@@ -306,4 +306,18 @@ export class ApiService {
 
     return response.data
   }
+
+  async getAddress(data:any) {
+    console.log(data)
+    const options = {
+      url: `https://nominatim.openstreetmap.org/reverse?lat=${data.lat}&lon=${data.lon}&format=json`,
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    };
+
+    const response: HttpResponse = await CapacitorHttp.get(options);
+
+    return response.data
+  }
+
+  
 }

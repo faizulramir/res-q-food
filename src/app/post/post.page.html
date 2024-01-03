@@ -49,7 +49,7 @@
   </div>
   
   <ion-item>
-    <ion-label>Cooking Time</ion-label>
+    <ion-label>Time Limit</ion-label>
     <ion-datetime [(ngModel)]="post.time" name="time" presentation="time"></ion-datetime>
   </ion-item>
   
@@ -57,9 +57,9 @@
     <ion-label><b>Address</b></ion-label>
   </ion-item>
 
-  <!-- <ion-item lines="none">
-    <ion-checkbox>Use my current address</ion-checkbox>
-  </ion-item> -->
+  <ion-item lines="none">
+    <ion-checkbox (ionChange)="userCurrent($event)">Use my current address</ion-checkbox>
+  </ion-item>
 
   <div class="pickup">
     <ion-item lines="none">

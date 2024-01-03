@@ -7,6 +7,7 @@ import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ApiService } from '../services/api/api.service';
 import { LoadingController } from '@ionic/angular';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-post',
@@ -23,7 +24,8 @@ export class PostPage implements OnInit{
     private alertController: AlertController,
     private api: ApiService,
     private route: ActivatedRoute,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private _location: Geolocation
   ) {}
   
   post:any = {
@@ -141,4 +143,14 @@ export class PostPage implements OnInit{
   async takePicture () {
     this.router.navigate(['index/tabs/post/post-img'])
   };
+
+  async userCurrent (event:any) {
+    if (event.detail.checked) {
+      const coordinates = await Geolocation.getCurrentPosition();
+      const address = await this.api.getAddress({ lat: coordinates.coords.latitude, lon: coordinates.coords.longitude })
+      this.post.address = address.display_name
+    } else {
+      this.post.address = ''
+    }
+  }
 }
