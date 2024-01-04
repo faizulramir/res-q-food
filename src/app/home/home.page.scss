@@ -4,11 +4,11 @@
 }
 
 .top-card {
-    height: 30%;
+    height: 40%;
     width: 100%;
     border-radius: 10px;
-    background: rgb(34,193,195);
-    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(93,0,44,1) 100%);
+    // background: rgb(34,193,195);
+    background: url('../../assets/img/food.jpg');
 }
     
 .xc {
@@ -28,8 +28,8 @@
 
 .top-bg {
   height: 40%;
-  background: rgb(34,193,195);
-  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(93,0,44,1) 100%);
+  background: rgb(255,248,248);
+  background: linear-gradient(0deg, rgba(255,248,248,1) 0%, rgba(194,12,98,1) 91%);
 }
 
 .header-color {

@@ -16,9 +16,10 @@ const config: SocketIoConfig = { url: 'https://powerful-blessed-falcon.ngrok-fre
 } };
 import { ForgetComponent } from './forget/forget.component';
 import { NotificationModalComponent } from './notification-modal/notification-modal.component';
+import { RegisterModalComponent } from './auth/register-modal/register-modal.component';
 
 @NgModule({
-  declarations: [AppComponent, ForgetComponent, NotificationModalComponent],
+  declarations: [AppComponent, ForgetComponent, NotificationModalComponent, RegisterModalComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), FormsModule, SocketIoModule.forRoot(config)],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

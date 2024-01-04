@@ -1,8 +1,8 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-title class="pacifico">Reset Password</ion-title>
+  <ion-toolbar style="--background: #C20C62; --color: white;">
+    <ion-title>Reset Password</ion-title>
     <ion-buttons slot="end">
-      <ion-button color="medium" (click)="cancel()">Close</ion-button>
+      <ion-button (click)="cancel()">Close</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -48,10 +48,10 @@
       </div>
       <br>
       <div style="text-align: center;" *ngIf="!successPage && !loading">
-        <ion-button color="primary" (click)="goSubmit()">Submit</ion-button>
+        <ion-button (click)="goSubmit()" style="--background: #C20C62; width:50%;">Submit</ion-button>
         <br>
         <div *ngIf="submitEmail && !successPage && !loading && !resetPage">
-          <ion-button color="warning" (click)="sendOTP()">Resend OTP</ion-button>
+          <ion-button color="warning" (click)="sendOTP()" style="width:50%;">Resend OTP</ion-button>
         </div>
       </div>
       <h4 style="text-align: center; color: green;" *ngIf="successPage && !loading">Success!</h4>

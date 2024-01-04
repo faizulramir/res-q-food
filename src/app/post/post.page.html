@@ -1,16 +1,16 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-title class="pacifico">
+  <ion-toolbar style="--background: #C20C62; --color: white;">
+    <ion-title>
       Create New Post
     </ion-title>
     <ion-buttons slot="end" class="ion-padding" (click)="doChecking()">
-      <b style="color:blueviolet;">POST</b>
+      <b>POST</b>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item lines="none" *ngIf="user">
+  <ion-item lines="none" *ngIf="user" style="padding-top: 20px;">
     <ion-avatar slot="start">
       <img [src]="user.pic ? user.pic : 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
     </ion-avatar>
@@ -79,6 +79,6 @@
     </div>
   </div>
   <ion-item style="text-align: center; padding-top: 10px;" lines="none">
-    <ion-button style="width: 100%;" size="large" (click)="doChecking()">POST</ion-button>
+    <ion-button style="width: 100%; --background: #C20C62; --color: white;" size="large" (click)="doChecking()">POST</ion-button>
   </ion-item>
 </ion-content>

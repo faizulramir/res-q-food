@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar style="--background: #C20C62; --color: white;">
     <ion-buttons slot="start" (click)="goHistory()">
       <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
     </ion-buttons>
-    <ion-title class="pacifico">Food Detail</ion-title>
+    <ion-title>Food Detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -46,9 +46,9 @@
 </ion-content>
 
 <div *ngIf="user && food">
-  <ion-footer class="ion-no-border ion-padding" *ngIf="userType === 1 && food.status === 0">
-    <ion-toolbar style="text-align: center;">
-      <ion-button style="width: 100%;" size="large" (click)="goSubmit()">Accept</ion-button>
+  <ion-footer class="ion-no-border ion-padding" *ngIf="userType === 1 && food.status === 0" style="background: white;">
+    <ion-toolbar style="text-align: center;" style="--background: white; --color: white;">
+      <ion-button style="width: 100%; --background: #C20C62; --color: white;" size="large"(click)="goSubmit()">Accept</ion-button>
     </ion-toolbar>
   </ion-footer>
 </div>

@@ -1,0 +1,24 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="xc">
+    <form style="text-align: center; width: 60%;">
+      <ion-row>
+        <ion-col>
+          <ion-button size="large" style="width: 100%; --background: #C20C62;" (click)="goSignUp('1')">NGO</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button size="large" color="light" style="width: 100%;" (click)="goSignUp('0')">Bakery</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+</ion-content>

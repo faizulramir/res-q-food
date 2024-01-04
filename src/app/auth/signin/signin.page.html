@@ -15,37 +15,18 @@
     </div>
     <div class="row">
       <div class="col" style="text-align: center;">
-        <ion-button size="large" style="width: 100%;" (click)="doLogin()">Login</ion-button>
+        <ion-button size="large" style="width: 100%; --background: #C20C62;"(click)="doLogin()">Login</ion-button>
       </div>
     </div>
     <div class="row">
       <div class="col" style="text-align: center;">
-        <p>Don't have an account? <span style="color: blue; text-decoration: underline;" id="open-modal-2" expand="block">Sign Up Here</span></p>
+        <p>Don't have an account? <span style="color: wheat; text-decoration: underline;" (click)="doSignUp()">Sign Up Here</span></p>
       </div>
     </div>
     <div class="row">
       <div class="col" style="text-align: center;">
-        <p>Forget Password? <span style="color: blue; text-decoration: underline;" (click)="goForget()">Click Here</span></p>
+        <p>Forget Password? <span style="color: wheat; text-decoration: underline;" (click)="goForget()">Click Here</span></p>
       </div>
     </div>
   </form>
-
-  <ion-modal #modal trigger="open-modal-2" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]">
-    <ng-template>
-      <ion-content>
-        <ion-row style="margin-top: 7%;">
-          <ion-col class="ion-activatable" style="text-align: center; border-right: 1px solid black;">
-            <ion-ripple-effect></ion-ripple-effect>
-            <img src="../../assets/img/ngo.png" width="47%" alt="" (click)="goSignUp('1')">
-            <h4>NGO</h4>
-          </ion-col>
-          <ion-col class="ion-activatable" style="text-align: center;">
-            <ion-ripple-effect></ion-ripple-effect>
-            <img src="../../assets/img/user.png" width="50%" (click)="goSignUp('0')">
-            <h4>Volunteer</h4>
-          </ion-col>
-        </ion-row>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
 </ion-content>

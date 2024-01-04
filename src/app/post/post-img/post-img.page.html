@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar style="--background: #C20C62; --color: white;">
     <ion-buttons slot="start">
       <ion-icon slot="icon-only" name="arrow-back-outline" slot="end" (click)="goBack()"></ion-icon>
     </ion-buttons>
-    <ion-title class="pacifico">Image Crop</ion-title>
+    <ion-title>Image Crop</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="cropImage()" *ngIf="myImage">
         <ion-icon slot="icon-only" name="checkmark"></ion-icon>
@@ -13,9 +13,12 @@
 </ion-header>
  
 <ion-content>
-  <ion-button (click)="selectImage()" expand="full" *ngIf="!myImage"
-    >Select image</ion-button
-  >
+  <div class="xc" *ngIf="!myImage">
+    <ion-button style="--background: #C20C62; --color: white;" size="large" (click)="selectImage()" expand="full"
+      >Select image</ion-button
+    >
+  </div>
+  
   <ion-row *ngIf="myImage">
     <ion-col size="3" class="ion-text-center">
       <ion-button fill="clear" (click)="rotate()">

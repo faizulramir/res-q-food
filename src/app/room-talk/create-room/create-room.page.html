@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar style="--background: #C20C62; --color: white;">
     <ion-buttons slot="start">
       <ion-icon slot="icon-only" name="arrow-back-outline" slot="end" (click)="goBack()"></ion-icon>
     </ion-buttons>
-    <ion-title class="pacifico">
+    <ion-title>
       Create Chat Room
     </ion-title>
   </ion-toolbar>
@@ -19,7 +19,7 @@
           <ion-input [(ngModel)]="title" name="room" type="text" placeholder="What do want to talk about?"></ion-input>
         </ion-item>
         <br>
-        <ion-button size="large" style="width: 100%;" (click)="checkInputs()">Start Now</ion-button>
+        <ion-button size="large" style="width: 100%; --background: #C20C62;" (click)="checkInputs()">Start Now</ion-button>
       </div>
     </form>
   </div>

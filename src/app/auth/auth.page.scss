@@ -10,6 +10,20 @@ ion-modal {
     }
 }
 
+ion-footer {
+    background:#32124B;
+}
+
+
+ion-content {
+    color: white;
+    --background: #32124B;
+}
+
+ion-toolbar {
+    --background: #32124B;
+}
+
 .container {
     background-image: url('../../assets/img/auth-bg.png');
 }

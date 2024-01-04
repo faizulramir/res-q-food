@@ -1,10 +1,10 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-title class="pacifico">
+  <ion-toolbar style="--background: #C20C62; --color: white;">
+    <ion-title>
       My Profile
     </ion-title>
     <ion-buttons slot="end">
-      <ion-icon slot="icon-only" color="danger" (click)="confirmLogout()" name="log-out-outline"></ion-icon>
+      <ion-icon slot="icon-only" color="light" (click)="confirmLogout()" name="log-out-outline"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -74,7 +74,7 @@
       <ion-note>Leave empty if there's no password changes</ion-note>
     </div>
     <ion-item style="text-align: center; padding-top: 10px;" lines="none">
-      <ion-button style="width: 100%;" size="large" (click)="checkInputs()">Submit</ion-button>
+      <ion-button style="width: 100%;  --background: #C20C62; --color: white;" size="large" (click)="checkInputs()">Submit</ion-button>
     </ion-item>
   </form>
 </ion-content>

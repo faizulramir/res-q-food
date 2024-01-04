@@ -1,16 +1,16 @@
 <ion-header class="ion-no-border" *ngIf="userType === 0 || userType === '0'">
-  <ion-toolbar>
-    <ion-title class="pacifico">
+  <ion-toolbar style="--background: #C20C62;">
+    <ion-title style="color: white;">
       Res-Q Food
     </ion-title>
     <ion-buttons slot="end">
-      <ion-icon slot="icon-only" name="notifications-outline" (click)="openNotification()"></ion-icon>
+      <ion-icon slot="icon-only" color="light" name="notifications-outline" (click)="openNotification()"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-header class="ion-no-border" *ngIf="userType === 1 || userType === '1'">
-  <ion-toolbar class="header-color">
+  <ion-toolbar style="--background: #C20C62;">
     <ion-title class="pacifico" style="color: white;">
       Res-Q Food
     </ion-title>
@@ -21,16 +21,9 @@
 </ion-header>
 
 <ion-content class="ion-padding" *ngIf="userType === 0 || userType === '0'">
-  <div class="top-card">
-    <ion-row class="xc">
-      <ion-col  style="text-align: center;">
-        <h4 style="color: white;">Share Your Love with donation</h4>
-        <ion-button (click)="goDonate()" color="tertiary">Donate</ion-button>
-      </ion-col>
-      <ion-col>
-        <img src="../../assets/img/auth-bg.png" alt="">
-      </ion-col>
-    </ion-row>
+  <h4 class="ion-padding" style="text-align: center;"><b>Great! Ready to start having an impact? changemaker?</b></h4>
+  <div class="top-card" style="position: relative;">
+    <ion-button size="large" style="--background: #C20C62; position: absolute; bottom: 0; right: 10%; width:80%;"  (click)="goDonate()">DONATE NOW</ion-button>
   </div>
 
   <h4 style="padding-bottom: 15px; padding-top: 20px;">Latest Updates</h4>
@@ -79,7 +72,7 @@
  
   <hr>
   <div class="bot-c ion-padding">
-    <h4>New Request</h4>
+    <h4>New Donation</h4>
     <ion-list *ngFor="let food of foods">
       <ion-item button (click)="goPending(food.id)">
         <ion-thumbnail slot="start">

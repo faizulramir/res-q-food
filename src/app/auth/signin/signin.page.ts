@@ -8,6 +8,7 @@ import { ApiService } from 'src/app/services/api/api.service';
 import { ForgetComponent } from 'src/app/forget/forget.component';
 import { Socket } from 'ngx-socket-io';
 import { LoadingController } from '@ionic/angular';
+import { RegisterModalComponent } from '../register-modal/register-modal.component';
 
 @Component({
   selector: 'app-signin',
@@ -69,8 +70,8 @@ export class SigninPage {
   }
 
   async doLogin() {
-    this.showLoading()
     if (this.login.username && this.login.password) {
+      this.showLoading()
       this.loginData = await this.api.postLogin(this.login)
       if (this.loginData) {
         this.presentToast('Authenticating')
@@ -120,5 +121,18 @@ export class SigninPage {
       component: ForgetComponent,
     });
     modal.present();
+  }
+
+  async doSignUp() {
+    const modal = await this.modalCtrl.create({
+      component: RegisterModalComponent,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'type') {
+      this.goSignUp(data)
+    }
   }
 }

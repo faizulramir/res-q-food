@@ -5,6 +5,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ApiService } from '../services/api/api.service';
+import { RegisterModalComponent } from './register-modal/register-modal.component';
 
 @Component({
   selector: 'app-auth',
@@ -52,6 +53,19 @@ export class AuthPage {
 
     if (modal) {
       modal.dismiss()
+    }
+  }
+
+  async doSignUp() {
+    const modal = await this.modalCtrl.create({
+      component: RegisterModalComponent,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'type') {
+      this.goSignUp(data)
     }
   }
 }
