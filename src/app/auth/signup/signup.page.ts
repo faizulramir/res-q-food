@@ -30,7 +30,8 @@ export class SignupPage implements OnInit {
     email: '',
     password: '',
     phone: '',
-    userType: ''
+    userType: '',
+    registrationNumber: ''
   }
 
   registerData:any
@@ -63,9 +64,11 @@ export class SignupPage implements OnInit {
   }
 
   async doSignUp() {
-    if (!this.register.username && !this.register.email && !this.register.password && !this.register.phone) {
-      return this.presentToast("Please fill in required fields!")
-    }
+    if (this.register.password.length > 10) return this.presentToast("Password must be less than 10 characters");
+
+    if (!/^[a-zA-Z0-9]*$/.test(this.register.password)) return this.presentToast("Password must be a combination of letters and numbers");
+
+    if (!this.register.username && !this.register.email && !this.register.password && !this.register.phone) return this.presentToast("Please fill in required fields!")
 
     this.showLoading()
     this.registerData = await this.api.postRegister(this.register)

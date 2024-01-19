@@ -29,7 +29,7 @@ export class ApiService {
   }
 
   async postRegister(credentials:any) {
-    const data = { email: credentials.email, password: credentials.password, username: credentials.username, phone: credentials.phone, userType: credentials.userType };
+    const data = { email: credentials.email, password: credentials.password, username: credentials.username, phone: credentials.phone, userType: credentials.userType, registration_number: credentials.registrationNumber };
 
     const options = {
       url: this.baseUrl + "/register",

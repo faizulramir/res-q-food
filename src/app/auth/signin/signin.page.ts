@@ -79,7 +79,7 @@ export class SigninPage {
           this.presentToast(this.loginData.msg)
           this.loadingCtrl.dismiss();
         } else {
-          if (!this.loginData.user.status && this.loginData.user.type) {
+          if (!this.loginData.user.status) {
             this.loadingCtrl.dismiss();
             return this.presentToast('Account is not yet approved. Kindly contact admin.')
           }
