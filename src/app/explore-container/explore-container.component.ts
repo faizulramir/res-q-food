@@ -24,6 +24,7 @@ export class ExploreContainerComponent implements OnInit{
   @Input() acceptBy?: any;
   @Input() foodID?: any;
 
+  encID:any
   constructor(
     private modalCtrl: ModalController,
     private storage: StorageService,
@@ -35,14 +36,16 @@ export class ExploreContainerComponent implements OnInit{
   ) {}
 
   ngOnInit() {
+      this.encID = btoa(this.id)
       if (this.foodID) {
+        
         this.goDetail(this.name)
       }
   }
 
   async goDetail(name:any) {
     let food = await this.storage.get('food')
-    
+
     if (food) {
       await this.storage.remove('food')
     }

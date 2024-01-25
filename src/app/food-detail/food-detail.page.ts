@@ -21,6 +21,7 @@ export class FoodDetailPage {
   user:any
   logUser:any
   acceptBy:any
+  encId:any
 
   constructor(
     private modalCtrl: ModalController,
@@ -36,6 +37,7 @@ export class FoodDetailPage {
   
   async ionViewWillEnter() {
     this.food = await this.storage.get('food')
+    this.encId = btoa(this.food.id)
     this.userType = await this.storage.get('userType')
     this.logUser = await this.storage.get('user')
     this.user = await this.api.getUser({ id: this.food.userID })

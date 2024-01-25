@@ -3,7 +3,7 @@
   <ion-thumbnail slot="start">
     <img [src]="pic" />
   </ion-thumbnail>
-  <p><b>{{ detail }}</b> <br> Food for {{ quantity }} peoples <br> Time Limit: {{ time }} <br> Location: {{ address }}</p>
+  <p><b>{{ detail }}</b> <br> ID: #{{ encID }} <br> Food for {{ quantity }} peoples <br> Time Limit: {{ time }} <br> Location: {{ address }}</p>
   <ion-badge color="{{ status === 0 ? 'danger' : 'success' }}" slot="end">
     {{ status === 0 ? 'Pending' : 'Completed' }}
   </ion-badge>
